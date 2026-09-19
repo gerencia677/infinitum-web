@@ -331,12 +331,14 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
 
 /* ---------- Aparicion al hacer scroll ---------- */
 
-.rise { opacity: 0; transform: translateY(18px); transition: opacity 0.55s var(--ease), transform 0.55s var(--ease); }
-.rise.in { opacity: 1; transform: none; }
+/* Si el JS no corre, nada se esconde. Una pagina en blanco es peor
+   que una pagina sin animacion. */
+.js .rise { opacity: 0; transform: translateY(18px); transition: opacity 0.55s var(--ease), transform 0.55s var(--ease); }
+.js .rise.in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .rise { opacity: 1; transform: none; }
+  .js .rise { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
 

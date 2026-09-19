@@ -115,6 +115,10 @@
         });
       }, { rootMargin: '0px 0px 14% 0px', threshold: 0 });
       Array.prototype.forEach.call(risers, function (r) { io.observe(r); });
+      // Red de seguridad. Si algo falla, a los 2,5 segundos se ve todo.
+      setTimeout(function () {
+        Array.prototype.forEach.call(risers, function (r) { r.classList.add('in'); });
+      }, 2500);
     } else {
       Array.prototype.forEach.call(risers, function (r) { r.classList.add('in'); });
     }
