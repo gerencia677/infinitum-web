@@ -174,11 +174,24 @@
       ];
       var body = encodeURIComponent(lines.join('\n'));
       var asunto = encodeURIComponent('Solicitud de cotizacion desde la web');
-      window.location.href = 'mailto:gerencia@mg.com.co?subject=' + asunto + '&body=' + body;
+      // Va a Silvia Rendon, direccion comercial. Gerencia queda en copia para
+      // que nada se pierda mientras el canal se asienta.
+      window.location.href = 'mailto:direccioncomercial@mg.com.co'
+        + '?cc=gerencia@mg.com.co&subject=' + asunto + '&body=' + body;
     });
   }
 
-  /* ---------- 8. Ano del pie ---------- */
+  /* ---------- 8. De que pagina salio el lead ---------- */
+
+  var waBtn = document.querySelector('[data-wa]');
+  if (waBtn) {
+    var deDonde = (document.title.split('—')[0] || '').trim() || 'la pagina';
+    var saludo = 'Hola, escribo desde la pagina de Infinitum, seccion '
+      + deDonde + '. Quiero cotizar un proyecto.';
+    waBtn.setAttribute('href', waBtn.getAttribute('href') + '?text=' + encodeURIComponent(saludo));
+  }
+
+  /* ---------- 9. Ano del pie ---------- */
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-year]'), function (el) {
     el.textContent = String(new Date().getFullYear());
