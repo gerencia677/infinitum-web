@@ -62,6 +62,7 @@
       Array.prototype.forEach.call(dots, function (d, k) { d.classList.toggle('on', k === i); });
       if (word) {
         var label = slides[i].getAttribute('data-label') || '';
+        if (word.textContent.trim() === label) { return; }   // ya dice eso, no parpadea
         word.style.opacity = '0';
         setTimeout(function () {
           word.textContent = label;
@@ -185,9 +186,11 @@
 
   var waBtn = document.querySelector('[data-wa]');
   if (waBtn) {
-    var deDonde = (document.title.split('—')[0] || '').trim() || 'la pagina';
-    var saludo = 'Hola, escribo desde la pagina de Infinitum, seccion '
-      + deDonde + '. Quiero cotizar un proyecto.';
+    var deDonde = (document.title.split('—')[0] || '').trim();
+    var saludo = (!deDonde || deDonde === 'Infinitum')
+      ? 'Hola, escribo desde la pagina de Infinitum. Quiero cotizar un proyecto.'
+      : 'Hola, escribo desde la pagina de Infinitum, seccion ' + deDonde
+        + '. Quiero cotizar un proyecto.';
     waBtn.setAttribute('href', waBtn.getAttribute('href') + '?text=' + encodeURIComponent(saludo));
   }
 
