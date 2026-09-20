@@ -3,7 +3,7 @@
 Arma el sitio de Infinitum.
 
 Junta cada archivo de `pages/` con la plantilla `templates/base.html`
-y escribe el resultado en `dist/`. Copia `assets/` tal cual.
+y escribe el resultado en `docs/`. Copia `assets/` tal cual.
 
 Se corre asi, y no necesita instalar nada:
 
@@ -23,7 +23,7 @@ RAIZ = Path(__file__).resolve().parent
 PLANTILLA = RAIZ / "templates" / "base.html"
 PAGINAS = RAIZ / "pages"
 ASSETS = RAIZ / "assets"
-SALIDA = RAIZ / "dist"
+SALIDA = RAIZ / "docs"   # docs/ es la carpeta que GitHub Pages publica sola
 
 CABECERA = re.compile(r"^<!--\s*(.*?)\s*-->", re.DOTALL)
 SELLO = ""
@@ -90,7 +90,7 @@ def main():
         (SALIDA / "index.html").read_text(encoding="utf-8"), encoding="utf-8"
     )
 
-    print("\nListo. {} paginas en dist/".format(len(archivos)))
+    print("\nListo. {} paginas en docs/".format(len(archivos)))
 
 
 if __name__ == "__main__":
