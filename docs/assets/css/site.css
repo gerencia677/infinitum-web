@@ -369,3 +369,39 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
 @media (max-width: 760px) {
   .feature img { aspect-ratio: 16 / 11; }
 }
+
+/* ---------- Las dos puertas ---------- */
+
+.puertas { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line-light); }
+.puerta {
+  position: relative; display: block; min-height: 62svh; overflow: hidden;
+  background: var(--navy-900); color: var(--white);
+}
+.puerta img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: transform 1.2s var(--ease), opacity 0.5s var(--ease); }
+.puerta:hover img { transform: scale(1.04); opacity: 0.62; }
+.puerta::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,22,40,0.34) 0%, rgba(12,22,40,0.82) 100%); }
+.puerta__in {
+  position: relative; z-index: 2; height: 100%; min-height: inherit;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: clamp(28px, 4vw, 56px);
+}
+.puerta b { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.puerta h3 { margin: 14px 0 0; font-size: clamp(24px, 3.4vw, 42px); font-weight: 200; letter-spacing: -0.01em; line-height: 1.1; }
+.puerta p { margin: 14px 0 0; max-width: 420px; color: rgba(255,255,255,0.8); font-weight: 300; }
+.puerta ul { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.puerta li { font-size: 12px; letter-spacing: 0.1em; color: rgba(255,255,255,0.62); text-transform: uppercase; }
+.puerta__ir { margin-top: 26px; display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.puerta:hover .puerta__ir { color: var(--white); }
+
+/* ---------- Muro de aliados ---------- */
+
+.aliados { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.aliado { background: var(--white); padding: 26px 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 118px; }
+.aliado b { display: block; font-size: 14px; letter-spacing: 0.14em; color: var(--navy); font-weight: 600; }
+.aliado span { display: block; margin-top: 7px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); }
+.aliado i { font-style: normal; display: block; margin-top: 6px; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); }
+
+@media (max-width: 860px) {
+  .puertas { grid-template-columns: 1fr; }
+  .puerta { min-height: 52svh; }
+}
