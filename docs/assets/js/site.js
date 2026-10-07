@@ -35,6 +35,7 @@
 
   if (openBtn) { openBtn.addEventListener('click', function () { setMenu(true); }); }
   if (closeBtn) { closeBtn.addEventListener('click', function () { setMenu(false); }); }
+  if (menu) { menu.addEventListener('click', function (e) { if (e.target === menu) { setMenu(false); } }); }
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { setMenu(false); }
   });
