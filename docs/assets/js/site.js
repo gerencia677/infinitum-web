@@ -177,7 +177,7 @@
       var asunto = encodeURIComponent('Solicitud de cotizacion desde la web');
       // Va a Silvia Rendon, direccion comercial. Gerencia queda en copia para
       // que nada se pierda mientras el canal se asienta.
-      window.location.href = 'mailto:direccioncomercial@mg.com.co'
+      window.location.href = 'mailto:ventas@mg.com.co'
         + '?cc=gerencia@mg.com.co&subject=' + asunto + '&body=' + body;
     });
   }
