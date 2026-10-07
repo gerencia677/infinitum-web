@@ -405,3 +405,40 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
   .puertas { grid-template-columns: 1fr; }
   .puerta { min-height: 52svh; }
 }
+
+/* =====================================================================
+   Refinado 6-oct-2026: estrategia de comunicación y diseño de la portada
+   Sistema de piezas: filete fino, peso 200 a 400, dorado solo sobre navy.
+   ===================================================================== */
+.hero__word { font-size: 12px; letter-spacing: 0.34em; font-weight: 500; color: var(--gold); margin: 0 0 30px; line-height: 1.2; }
+.hero__h1 { margin: 0; font-weight: 200; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.04; font-size: clamp(40px, 8.2vw, 118px); }
+.hero__h1 span { display: block; }
+.hero__sub { text-transform: none; letter-spacing: 0.01em; font-size: clamp(16px, 1.8vw, 22px); font-weight: 300; max-width: 640px; margin: 34px auto 0; color: rgba(255,255,255,0.88); line-height: 1.5; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 44px; }
+.hero__cta { margin-top: 0; }
+.cta-sub { margin: -6px 0 34px; font-size: 17px; font-weight: 300; color: var(--text-on-dark); }
+
+.puertas.tres { grid-template-columns: repeat(3, 1fr); }
+.puertas.tres .puerta { min-height: 66svh; }
+.puertas.tres .puerta h3 { font-size: clamp(22px, 2.5vw, 34px); }
+.puertas.tres .puerta p { font-size: 15px; }
+.puertas.tres .puerta b { line-height: 1.5; max-width: 300px; }
+@media (max-width: 1100px) { .puertas.tres { grid-template-columns: 1fr; } .puertas.tres .puerta { min-height: 48svh; } }
+
+.pasos { list-style: none; margin: 60px 0 0; padding: 0; display: grid; grid-template-columns: repeat(9, 1fr); border-top: 1px solid var(--line-light); }
+.pasos li { padding: 28px 8px 0; text-align: center; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white); font-weight: 400; }
+.pasos li i { display: block; font-style: normal; color: var(--gold); font-weight: 500; margin-bottom: 12px; letter-spacing: 0.2em; }
+@media (max-width: 900px) { .pasos { grid-template-columns: repeat(3, 1fr); row-gap: 30px; } }
+
+.miami__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.cadena { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-light); }
+.cadena li { display: flex; align-items: baseline; gap: 28px; padding: 26px 0; border-bottom: 1px solid var(--line-light); font-size: clamp(18px, 2vw, 26px); font-weight: 200; letter-spacing: 0.04em; }
+.cadena i { font-style: normal; font-size: 12px; letter-spacing: 0.2em; color: var(--gold); font-weight: 500; width: 34px; }
+@media (max-width: 860px) { .miami__grid { grid-template-columns: 1fr; } }
+
+.enlace-res { display: inline-block; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.enlace-res:hover { color: var(--navy); border-color: var(--gold-dark); }
+
+/* Sobre foto el texto va sobre velo navy de 55% o más (Brand Book 3b) */
+.hero::after { background: linear-gradient(180deg, rgba(20,33,61,0.66) 0%, rgba(20,33,61,0.58) 48%, rgba(20,33,61,0.86) 100%); }
+.hero__h1 { font-size: clamp(36px, 6.6vw, 96px); }
