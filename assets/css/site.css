@@ -73,13 +73,22 @@ section { padding: clamp(64px, 10vw, 140px) 0; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 90;
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px var(--gutter);
-  background: rgba(20, 33, 61, 0.96);
-  border-bottom: 1px solid rgba(201, 168, 92, 0.45);
-  backdrop-filter: saturate(140%) blur(14px);
-  transition: background 0.4s var(--ease), padding 0.4s var(--ease);
+  background: transparent;
+  transition: background 0.4s var(--ease), padding 0.4s var(--ease), border-color 0.4s var(--ease);
+  border-bottom: 1px solid transparent;
 }
+/* En la portada la foto va a sangre desde arriba. Un velo navy que se desvanece
+   hace legible el logo dorado sin poner una barra encima de la imagen. */
+.hdr::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; bottom: -64px; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(20,33,61,0.92) 0%, rgba(20,33,61,0.62) 55%, rgba(20,33,61,0) 100%);
+  transition: opacity 0.4s var(--ease);
+}
+.hdr > * { position: relative; z-index: 1; }
+.hdr.solid::before { opacity: 0; }
 .hdr.solid {
-  background: rgba(20, 33, 61, 0.94);
+  border-bottom-color: rgba(201, 168, 92, 0.45);
+  background: rgba(20, 33, 61, 0.96);
   backdrop-filter: saturate(140%) blur(14px);
   padding-top: 12px; padding-bottom: 12px;
 }
