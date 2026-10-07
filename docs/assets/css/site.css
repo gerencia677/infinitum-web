@@ -72,7 +72,10 @@ section { padding: clamp(64px, 10vw, 140px) 0; }
 .hdr {
   position: fixed; top: 0; left: 0; right: 0; z-index: 90;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px var(--gutter);
+  padding: 14px var(--gutter);
+  background: rgba(20, 33, 61, 0.96);
+  border-bottom: 1px solid rgba(201, 168, 92, 0.45);
+  backdrop-filter: saturate(140%) blur(14px);
   transition: background 0.4s var(--ease), padding 0.4s var(--ease);
 }
 .hdr.solid {
@@ -80,7 +83,7 @@ section { padding: clamp(64px, 10vw, 140px) 0; }
   backdrop-filter: saturate(140%) blur(14px);
   padding-top: 12px; padding-bottom: 12px;
 }
-.hdr__logo img { height: 43px; width: auto; }   /* 160 px de ancho: mínimo del logo con descriptor en pantalla retina */
+.hdr__logo img { height: 48px; width: auto; display: block; }   /* 180 px de ancho: el descriptor se lee en dorado sobre navy */
 .hdr__right { display: flex; align-items: center; gap: 18px; }
 
 .pill {
@@ -97,43 +100,42 @@ section { padding: clamp(64px, 10vw, 140px) 0; }
 .pill--line:hover { background: var(--white); color: var(--navy); }
 
 .burger { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; width: 30px; height: 30px; justify-content: center; }
-.burger span { display: block; height: 1px; background: var(--white); transition: width 0.3s var(--ease); }
+.burger span { display: block; height: 1px; background: var(--gold); transition: width 0.3s var(--ease); }
 .burger span:nth-child(1) { width: 28px; }
 .burger span:nth-child(2) { width: 20px; }
 .burger span:nth-child(3) { width: 28px; }
 .burger:hover span:nth-child(2) { width: 28px; }
 
 /* La cabecera sobre fondo claro invierte */
-.hdr--light .burger span { background: var(--navy); }
-.hdr--light .pill { background: var(--navy); color: var(--white); }
-.hdr--light .pill:hover { background: var(--gold); color: var(--navy); }
+/* El encabezado es siempre navy liso: el dorado solo se lee sobre navy. */
 
 /* ---------- Menu de pantalla completa ---------- */
 
 .menu {
   position: fixed; inset: 0; z-index: 100;
   background: var(--navy);
-  display: grid; grid-template-rows: auto 1fr auto;
-  padding: 24px var(--gutter) 40px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: clamp(12px, 2.6svh, 24px) var(--gutter) clamp(12px, 3svh, 32px);
+  overflow: hidden;
   opacity: 0; visibility: hidden; transform: translateY(-12px);
   transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s;
 }
 .menu.open { opacity: 1; visibility: visible; transform: none; }
 .menu__top { display: flex; align-items: center; justify-content: space-between; }
-.menu__top img { height: 43px; }
-.menu__close { font-size: 30px; line-height: 1; color: var(--white); padding: 6px 10px; }
+.menu__top img { height: 48px; width: auto; }
+.menu__close { font-size: 28px; line-height: 1; color: var(--white); padding: 6px 10px; }
 .menu__close:hover { color: var(--gold); }
 
-.menu__nav { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+.menu__nav { display: flex; flex-direction: column; justify-content: space-evenly; gap: 0; min-height: 0; padding: clamp(6px, 1.5svh, 16px) 0; }
 .menu__nav a {
   display: flex; align-items: baseline; gap: 18px;
-  font-size: clamp(26px, 4.6vw, 54px); font-weight: 200; letter-spacing: -0.02em;
-  color: var(--white); padding: 10px 0;
+  font-size: clamp(15px, min(3.5svh, 3.6vw), 26px); font-weight: 300; letter-spacing: 0.02em;
+  color: var(--white); padding: clamp(3px, 1svh, 9px) 0;
   border-bottom: 1px solid var(--line-light);
   transition: color 0.25s var(--ease), padding-left 0.35s var(--ease);
 }
 .menu__nav a:hover { color: var(--gold); padding-left: 16px; }
-.menu__nav a span { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; color: var(--gold); }
+.menu__nav a span { font-size: clamp(9px, 1.5svh, 11px); font-weight: 500; letter-spacing: 0.2em; color: var(--gold); }
 .menu__nav a.is-here { color: var(--gold); }
 
 .menu__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; color: var(--text-on-dark); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -314,7 +316,7 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
 .ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .ftr a:hover { color: var(--white); }
 .ftr__bot { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; font-size: 11px; letter-spacing: 0.1em; }
-.ftr__logo img { height: 43px; margin-bottom: 18px; }
+.ftr__logo img { height: 48px; width: auto; margin-bottom: 18px; }
 
 /* ---------- WhatsApp flotante ---------- */
 
@@ -410,12 +412,7 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
    Refinado 6-oct-2026: estrategia de comunicación y diseño de la portada
    Sistema de piezas: filete fino, peso 200 a 400, dorado solo sobre navy.
    ===================================================================== */
-.hero__word { font-size: 12px; letter-spacing: 0.34em; font-weight: 500; color: var(--gold); margin: 0 0 30px; line-height: 1.2; }
-.hero__h1 { margin: 0; font-weight: 200; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.04; font-size: clamp(40px, 8.2vw, 118px); }
-.hero__h1 span { display: block; }
-.hero__sub { text-transform: none; letter-spacing: 0.01em; font-size: clamp(16px, 1.8vw, 22px); font-weight: 300; max-width: 640px; margin: 34px auto 0; color: rgba(255,255,255,0.88); line-height: 1.5; }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 44px; }
-.hero__cta { margin-top: 0; }
 .cta-sub { margin: -6px 0 34px; font-size: 17px; font-weight: 300; color: var(--text-on-dark); }
 
 .puertas.tres { grid-template-columns: repeat(3, 1fr); }
@@ -439,6 +436,30 @@ p.lead { font-size: clamp(16px, 1.7vw, 21px); font-weight: 300; color: var(--tex
 .enlace-res { display: inline-block; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .enlace-res:hover { color: var(--navy); border-color: var(--gold-dark); }
 
-/* Sobre foto el texto va sobre velo navy de 55% o más (Brand Book 3b) */
-.hero::after { background: linear-gradient(180deg, rgba(20,33,61,0.66) 0%, rgba(20,33,61,0.58) 48%, rgba(20,33,61,0.86) 100%); }
-.hero__h1 { font-size: clamp(36px, 6.6vw, 96px); }
+
+/* =====================================================================
+   Norma de la página (7-oct-2026): todo se ve bien en cualquier aparato,
+   en vertical y en horizontal. Se prueba en seis tamaños antes de publicar.
+   ===================================================================== */
+.pill--cot { background: transparent; color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); font-weight: 600; letter-spacing: 0.2em; }
+.pill--cot:hover { background: var(--gold); color: var(--navy); }
+html, body { max-width: 100%; overflow-x: hidden; }
+img { max-width: 100%; }
+@media (max-width: 520px) {
+  .hdr { padding: 10px var(--gutter); }
+  .hdr__logo img { height: 44px; }
+  .hdr__right { gap: 12px; }
+  .pill--cot { padding: 9px 14px; font-size: 10px; }
+}
+@media (max-height: 460px) and (orientation: landscape) {
+  .hdr { padding: 6px var(--gutter); }
+  .hdr__logo img { height: 44px; }
+  .menu__nav { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(20px, 5vw, 60px); align-content: space-evenly; }
+  .menu__nav a { font-size: clamp(14px, 4.4svh, 20px); }
+  .menu__foot { font-size: 10px; gap: 8px; }
+}
+
+.form-ok { max-width: 900px; margin-top: 28px; padding: 28px 30px; border: 1px solid var(--gold-dark); background: var(--paper); }
+.form-ok h3 { margin: 0 0 8px; font-size: 20px; font-weight: 300; letter-spacing: 0.04em; color: var(--navy); }
+.form-ok p { margin: 0 0 20px; color: var(--text-soft); font-weight: 300; }
+.form-ok__btns { display: flex; flex-wrap: wrap; gap: 12px; }

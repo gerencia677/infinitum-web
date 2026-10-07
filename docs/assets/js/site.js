@@ -162,23 +162,44 @@
 
   var form = document.querySelector('form[data-contact]');
   if (form) {
+    var ok = document.createElement('div');
+    ok.className = 'form-ok';
+    ok.hidden = true;
+    ok.setAttribute('role', 'status');
+    form.parentNode.insertBefore(ok, form.nextSibling);
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var en = (readLang() === 'en');
       var d = new FormData(form);
-      var lines = [
-        'Nombre: ' + (d.get('nombre') || ''),
+      var nombre = (d.get('nombre') || '').toString().trim();
+      var texto = [
+        'Nombre: ' + nombre,
         'Ciudad: ' + (d.get('ciudad') || ''),
         'Correo: ' + (d.get('correo') || ''),
         'Telefono: ' + (d.get('telefono') || ''),
         '',
         (d.get('mensaje') || '')
-      ];
-      var body = encodeURIComponent(lines.join('\n'));
-      var asunto = encodeURIComponent('Solicitud de cotizacion desde la web');
-      // Va a Silvia Rendon, direccion comercial. Gerencia queda en copia para
-      // que nada se pierda mientras el canal se asienta.
-      window.location.href = 'mailto:ventas@mg.com.co'
-        + '?cc=gerencia@mg.com.co&subject=' + asunto + '&body=' + body;
+      ].join('\n');
+      var asunto = 'Solicitud de cotizacion desde la web';
+      // Va a ventas. Gerencia queda en copia para que nada se pierda.
+      var mail = 'mailto:ventas@mg.com.co?cc=gerencia@mg.com.co'
+        + '&subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(texto);
+      var wa = 'https://wa.me/573188367218?text='
+        + encodeURIComponent('Hola, soy ' + nombre + '. Escribo desde la pagina de Infinitum.\n\n' + (d.get('mensaje') || ''));
+      ok.innerHTML =
+        '<h3>' + (en ? 'Almost done' : 'Casi listo') + '</h3>' +
+        '<p>' + (en
+          ? 'Your message is ready. Choose how to send it. We reply within 12 business hours.'
+          : 'Su mensaje está listo. Elija cómo enviarlo. Le respondemos en menos de 12 horas hábiles.') + '</p>' +
+        '<div class="form-ok__btns">' +
+        '<a class="pill pill--gold" href="' + mail + '">' + (en ? 'Open my email' : 'Abrir mi correo') + '</a>' +
+        '<a class="pill" style="background:var(--navy);color:#fff" href="' + wa + '" target="_blank" rel="noopener">' + (en ? 'Send on WhatsApp' : 'Enviar por WhatsApp') + '</a>' +
+        '</div>';
+      ok.hidden = false;
+      try { ok.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (x) {}
+      window.location.href = mail;   // intenta abrir el correo; si no abre, quedan los dos botones
     });
   }
 
