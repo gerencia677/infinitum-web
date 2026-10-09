@@ -292,9 +292,8 @@
   function pintarAnios() {
     var n = aniosCumplidos();
     Array.prototype.forEach.call(document.querySelectorAll('[data-anios]'), function (el) { el.textContent = String(n); });
-    Array.prototype.forEach.call(document.querySelectorAll('.sello__v em'), function (el) { el.innerHTML = '2005<br>' + (2005 + n); });
     var sello = document.querySelector('.sello');
-    if (sello) { sello.setAttribute('aria-label', n + ' años de trayectoria, desde 2005'); }
+    if (sello) { sello.setAttribute('aria-label', n + ' años de trayectoria, en Colombia y Estados Unidos'); }
     applyLang(readLang());
   }
   pintarAnios();
