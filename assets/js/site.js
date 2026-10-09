@@ -273,6 +273,13 @@
   pintarEstado();
   setInterval(pintarEstado, 60000);
 
+  /* ---------- 8. Los anos de trayectoria siguen al calendario (fundada el 5-jun-2005) ---------- */
+  (function () {
+    var anios = new Date().getFullYear() - 2005;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-anios]'), function (el) { el.textContent = String(anios); });
+    Array.prototype.forEach.call(document.querySelectorAll('.sello__v em'), function (el) { el.innerHTML = '2005<br>' + new Date().getFullYear(); });
+  })();
+
   Array.prototype.forEach.call(document.querySelectorAll('[data-year]'), function (el) {
     el.textContent = String(new Date().getFullYear());
   });
