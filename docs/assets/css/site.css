@@ -593,3 +593,13 @@ img { max-width: 100%; }
 .ftr .ruta a { min-height: 36px; padding: 0 12px; font-size: 12px; border-color: rgba(255, 255, 255, 0.22); color: rgba(255, 255, 255, 0.78); }
 .ftr .ruta a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
 @media (max-width: 1024px) { .ruta a, .ftr .ruta a { min-height: 44px; } }
+
+/* Redes sociales: Instagram y Facebook (9-oct-2026) */
+.social { display: flex; flex-wrap: wrap; gap: 10px; }
+.social a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 16px 0 13px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; letter-spacing: 0.02em; color: var(--navy); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.social svg { width: 18px; height: 18px; flex: none; }
+.social a:hover { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.ftr .social { margin-top: 20px; }
+.ftr .social a { border-color: rgba(255, 255, 255, 0.24); color: rgba(255, 255, 255, 0.82); }
+.ftr .social a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.contact-list .social a { font-size: 13px; }
