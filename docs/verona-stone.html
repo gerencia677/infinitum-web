@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
-<link rel="stylesheet" href="assets/css/site.css?v=20261009143052">
+<link rel="stylesheet" href="assets/css/site.css?v=20261009163311">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -168,12 +168,28 @@
   function falla() {
     grid.innerHTML = '<p class="vs-estado">En este momento no podemos mostrar el catálogo. Escríbanos por WhatsApp y le enviamos las láminas disponibles con su precio.</p>';
   }
-  fetch(API, {mode: 'cors'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
-    datos = d;
-    if (d.contacto) wa.href = 'https://wa.me/' + d.contacto + '?text=' + encodeURIComponent('Hola, vi el catálogo de Verona Stone en infinitum.archi.');
-    armarFiltros(); pintar();
-    pie.textContent = (d.iva || '') + '. Existencias y precios al día de hoy, sujetos a disponibilidad al momento de la reserva.';
-  }).catch(falla);
+  // El catálogo se vuelve a pedir solo: cada 45 segundos mientras la pestaña se ve, y apenas la persona vuelve a ella.
+  // Así, lo que se cambie en Atrio (precios, láminas, existencias) llega a una página que alguien dejó abierta, sin recargar.
+  // Si el servidor no contesta una vez ya cargado, se deja lo que se mostraba: el aviso de falla es solo para la primera carga.
+  var firma = null, enVuelo = false;
+  function cargar() {
+    if (enVuelo) return;
+    enVuelo = true;
+    fetch(API, {mode: 'cors', cache: 'no-store'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      enVuelo = false;
+      var f = JSON.stringify(d);
+      if (f === firma) return;
+      firma = f; datos = d;
+      if (d.contacto) wa.href = 'https://wa.me/' + d.contacto + '?text=' + encodeURIComponent('Hola, vi el catálogo de Verona Stone en infinitum.archi.');
+      if (activo !== 'Todos' && !d.productos.some(function (p) { return p.familia === activo; })) activo = 'Todos';
+      armarFiltros(); pintar();
+      pie.textContent = (d.iva || '') + '. Existencias y precios al día de hoy, sujetos a disponibilidad al momento de la reserva.';
+    }).catch(function () { enVuelo = false; if (!datos) falla(); });
+  }
+  cargar();
+  setInterval(function () { if (!document.hidden) cargar(); }, 45000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) cargar(); });
+  window.addEventListener('focus', cargar);
 })();
 </script>
 
@@ -226,6 +242,6 @@
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.4.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
 </a>
 
-<script src="assets/js/site.js?v=20261009143052" defer></script>
+<script src="assets/js/site.js?v=20261009163311" defer></script>
 </body>
 </html>

@@ -74,11 +74,27 @@ slug: verona-stone.html
   function falla() {
     grid.innerHTML = '<p class="vs-estado">En este momento no podemos mostrar el catálogo. Escríbanos por WhatsApp y le enviamos las láminas disponibles con su precio.</p>';
   }
-  fetch(API, {mode: 'cors'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
-    datos = d;
-    if (d.contacto) wa.href = 'https://wa.me/' + d.contacto + '?text=' + encodeURIComponent('Hola, vi el catálogo de Verona Stone en infinitum.archi.');
-    armarFiltros(); pintar();
-    pie.textContent = (d.iva || '') + '. Existencias y precios al día de hoy, sujetos a disponibilidad al momento de la reserva.';
-  }).catch(falla);
+  // El catálogo se vuelve a pedir solo: cada 45 segundos mientras la pestaña se ve, y apenas la persona vuelve a ella.
+  // Así, lo que se cambie en Atrio (precios, láminas, existencias) llega a una página que alguien dejó abierta, sin recargar.
+  // Si el servidor no contesta una vez ya cargado, se deja lo que se mostraba: el aviso de falla es solo para la primera carga.
+  var firma = null, enVuelo = false;
+  function cargar() {
+    if (enVuelo) return;
+    enVuelo = true;
+    fetch(API, {mode: 'cors', cache: 'no-store'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      enVuelo = false;
+      var f = JSON.stringify(d);
+      if (f === firma) return;
+      firma = f; datos = d;
+      if (d.contacto) wa.href = 'https://wa.me/' + d.contacto + '?text=' + encodeURIComponent('Hola, vi el catálogo de Verona Stone en infinitum.archi.');
+      if (activo !== 'Todos' && !d.productos.some(function (p) { return p.familia === activo; })) activo = 'Todos';
+      armarFiltros(); pintar();
+      pie.textContent = (d.iva || '') + '. Existencias y precios al día de hoy, sujetos a disponibilidad al momento de la reserva.';
+    }).catch(function () { enVuelo = false; if (!datos) falla(); });
+  }
+  cargar();
+  setInterval(function () { if (!document.hidden) cargar(); }, 45000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) cargar(); });
+  window.addEventListener('focus', cargar);
 })();
 </script>
