@@ -177,3 +177,29 @@ def rellenar_vert(im,mask,limite=None,maxrun=70):
                 t=(y-ya)/max(1,yb-ya)
                 im.putpixel((x,y),tuple(int(ca[k]*(1-t)+cb[k]*t) for k in range(3)))
             i=j+1
+
+import random, statistics as _st
+def rellenar_ruido(im,mask,radio=14,intentos=14,semilla=7):
+    """Relleno con textura: cada píxel enmascarado copia un píxel libre cercano, el que más se parece al relleno suave de guía.
+    Sirve para follaje y superficies con grano, donde un relleno liso se nota."""
+    rnd=random.Random(semilla); W,H=im.size; mask=set(mask)
+    guia=im.copy(); rellenar(guia,mask)
+    libres=lambda x,y:(0<=x<W and 0<=y<H and (x,y) not in mask)
+    out={}
+    for (x,y) in mask:
+        g=guia.getpixel((x,y)); mejor=None
+        for _ in range(intentos):
+            q=(x+rnd.randint(-radio,radio),y+rnd.randint(-radio,radio))
+            if not libres(*q): continue
+            c=im.getpixel(q); d=sum((c[i]-g[i])**2 for i in range(3))
+            if mejor is None or d<mejor[0]: mejor=(d,c)
+        out[(x,y)]=mejor[1] if mejor else g
+    for p,c in out.items(): im.putpixel(p,c)
+def rellenar_col_mediana(im,mask,alto=45,filtro=None):
+    """Cada píxel enmascarado toma la mediana de los píxeles libres de su columna (vale para listones o tablas con veta vertical)."""
+    mask=set(mask); W,H=im.size; out={}
+    for (x,y) in mask:
+        vs=[im.getpixel((x,yy)) for yy in range(max(0,y-alto),min(H,y+alto+1)) if (x,yy) not in mask
+            and (filtro is None or filtro(im.getpixel((x,yy))))]
+        out[(x,y)]=tuple(int(_st.median(v[i] for v in vs)) for i in range(3)) if vs else im.getpixel((x,y))
+    for p,c in out.items(): im.putpixel(p,c)
