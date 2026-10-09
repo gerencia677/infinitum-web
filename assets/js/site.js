@@ -218,6 +218,61 @@
 
   /* ---------- 9. Ano del pie ---------- */
 
+  /* ---------- 7. Horario de atencion: abierto o fuera de horario, en hora de Colombia ---------- */
+  /* Lunes 8:00 a 16:00, martes a viernes 8:00 a 16:30, sabado 8:00 a 12:00. Festivos (Ley Emiliani) de oct-2026 a 2027;
+     despues de 2027 hay que agregar los del ano nuevo o el estado dira "abierto" un festivo. */
+  var FESTIVOS = ['2026-10-12', '2026-11-02', '2026-11-16', '2026-12-08', '2026-12-25',
+    '2027-01-01', '2027-01-11', '2027-03-22', '2027-03-25', '2027-03-26', '2027-05-10', '2027-05-31', '2027-06-07',
+    '2027-07-05', '2027-07-20', '2027-08-07', '2027-08-16', '2027-10-18', '2027-11-01', '2027-11-15', '2027-12-08', '2027-12-25'];
+  var HORARIO = { 1: [480, 960], 2: [480, 990], 3: [480, 990], 4: [480, 990], 5: [480, 990], 6: [480, 720] };
+  var DIAS_ES = ['el domingo', 'el lunes', 'el martes', 'el miércoles', 'el jueves', 'el viernes', 'el sábado'];
+  var DIAS_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  function ahoraBogota() {
+    try {
+      var f = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short' }).formatToParts(new Date());
+      var o = {}; f.forEach(function (p) { o[p.type] = p.value; });
+      var dias = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      return { fecha: o.year + '-' + o.month + '-' + o.day, dia: dias[o.weekday], min: (parseInt(o.hour, 10) % 24) * 60 + parseInt(o.minute, 10) };
+    } catch (err) { return null; }
+  }
+  function sumarDia(fecha, n) {
+    var d = new Date(fecha + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n);
+    return { fecha: d.toISOString().slice(0, 10), dia: d.getUTCDay() };
+  }
+  function laboral(fecha, dia) { return HORARIO[dia] && FESTIVOS.indexOf(fecha) === -1; }
+
+  function pintarEstado() {
+    var els = document.querySelectorAll('[data-estado]');
+    if (!els.length) { return; }
+    var n = ahoraBogota();
+    if (!n) { return; }
+    var h = laboral(n.fecha, n.dia) ? HORARIO[n.dia] : null;
+    var es, en, abierto = !!(h && n.min >= h[0] && n.min < h[1]);
+    if (abierto) {
+      es = 'Atendemos ahora'; en = 'We are available now';
+    } else {
+      var cuando_es, cuando_en;
+      if (h && n.min < h[0]) { cuando_es = 'hoy'; cuando_en = 'today'; }
+      else {
+        var k = 1, s = sumarDia(n.fecha, 1);
+        while (!laboral(s.fecha, s.dia) && k < 8) { k += 1; s = sumarDia(n.fecha, k); }
+        cuando_es = (k === 1) ? 'mañana' : DIAS_ES[s.dia]; cuando_en = (k === 1) ? 'tomorrow' : DIAS_EN[s.dia];
+      }
+      es = 'Fuera de horario. Le respondemos ' + cuando_es + ' desde las 8:00 a. m.';
+      en = 'Outside office hours. We reply ' + cuando_en + ' from 8:00 am.';
+    }
+    var lang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
+    Array.prototype.forEach.call(els, function (el) {
+      el.setAttribute('data-es', es); el.setAttribute('data-en', en);
+      el.textContent = lang === 'en' ? en : es;
+      el.classList.toggle('off', !abierto);
+    });
+  }
+  pintarEstado();
+  setInterval(pintarEstado, 60000);
+
   Array.prototype.forEach.call(document.querySelectorAll('[data-year]'), function (el) {
     el.textContent = String(new Date().getFullYear());
   });

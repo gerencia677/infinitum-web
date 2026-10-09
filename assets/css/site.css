@@ -569,3 +569,27 @@ img { max-width: 100%; }
 .vs-estado{grid-column:1/-1;color:var(--text-soft);text-align:center;padding:40px 0}
 .vs-pie{margin:28px 0 0;font-size:12px;color:var(--text-soft);text-align:center}
 .vs-filtros{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Horario de atención del teléfono y WhatsApp (9-oct-2026) */
+.horario { margin-top: 18px; max-width: 340px; }
+.contact-list .horario p { font-size: 12px; }
+.horario__estado { display: flex; align-items: center; gap: 9px; margin: 0 0 10px; letter-spacing: 0.04em; color: var(--navy); font-weight: 400; }
+.horario__estado::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 3px rgba(201, 168, 92, 0.28); }
+.horario__estado.off::before { background: transparent; border: 1px solid var(--gold-dark); box-shadow: none; }
+.horario__fila { display: flex; justify-content: space-between; gap: 18px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13px; font-weight: 300; line-height: 1.4; }
+.horario__fila span { color: rgba(20, 33, 61, 0.62); }
+.horario__fila b { font-weight: 400; white-space: nowrap; text-align: right; }
+.contact-list .horario__nota { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--line); color: rgba(20, 33, 61, 0.6); font-weight: 300; line-height: 1.5; }
+.ftr__hora { display: block; margin-top: 4px; font-size: 11.5px; line-height: 1.5; color: rgba(255, 255, 255, 0.5); }
+@media (max-width: 420px) { .horario__fila b { white-space: normal; } }
+
+/* Enlaces para llegar: Google Maps, Waze y Apple Maps (9-oct-2026) */
+.ruta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.ruta__t { flex-basis: 100%; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; }
+.ruta a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 12.5px; letter-spacing: 0.02em; color: var(--navy); font-weight: 400; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.ruta a:hover { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.ftr .ruta { margin-top: 2px; gap: 6px; }
+.ftr .ruta__t { color: var(--gold); font-size: 9.5px; }
+.ftr .ruta a { min-height: 36px; padding: 0 12px; font-size: 12px; border-color: rgba(255, 255, 255, 0.22); color: rgba(255, 255, 255, 0.78); }
+.ftr .ruta a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+@media (max-width: 1024px) { .ruta a, .ftr .ruta a { min-height: 44px; } }
