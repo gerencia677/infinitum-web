@@ -1,0 +1,84 @@
+<!--
+title: Verona Stone — Infinitum
+desc: Piedra sinterizada y porcelanato importados, con existencias y precio por metro cuadrado. Marca aliada de Infinitum.
+slug: verona-stone.html
+-->
+
+<section class="phero">
+  <img src="assets/img/portafolio/expo.jpg" alt="" aria-hidden="true">
+  <div class="phero__in">
+    <p class="eyebrow" data-es="MARCA ALIADA" data-en="ALLIED BRAND">MARCA ALIADA</p>
+    <h1>Verona Stone</h1>
+    <p data-es="Piedra sinterizada y porcelanato de gran formato, importados y en existencia. Precio por metro cuadrado, con disponibilidad al día." data-en="Large-format sintered stone and porcelain, imported and in stock. Price per square meter, with up-to-date availability.">Piedra sinterizada y porcelanato de gran formato, importados y en existencia. Precio por metro cuadrado, con disponibilidad al día.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="vs-cab rise">
+      <p class="vs-nota" data-es="Línea especial de Infinitum. Las láminas se cotizan, se reservan y se entregan con nuestro mismo método. Los precios son por metro cuadrado, antes de IVA, y cambian con el dólar." data-en="A special Infinitum line. Slabs are quoted, reserved and delivered with our same method. Prices are per square meter, before VAT, and move with the dollar.">Línea especial de Infinitum. Las láminas se cotizan, se reservan y se entregan con nuestro mismo método. Los precios son por metro cuadrado, antes de IVA, y cambian con el dólar.</p>
+      <div class="filters vs-filtros" id="vs-filtros" role="group" aria-label="Filtrar por formato"></div>
+    </div>
+    <div class="vs-grid" id="vs-grid" aria-live="polite"><p class="vs-estado">Cargando el catálogo…</p></div>
+    <noscript><p class="vs-estado">Para ver el catálogo con precios y existencias, active JavaScript o escríbanos por WhatsApp.</p></noscript>
+    <p class="vs-pie" id="vs-pie"></p>
+  </div>
+</section>
+
+<section class="on-dark">
+  <div class="wrap center">
+    <h2 class="big" data-es="¿Qué lámina necesita para su proyecto?" data-en="Which slab does your project need?">¿Qué lámina necesita para su proyecto?</h2>
+    <p><a class="pill pill--gold" id="vs-wa" href="https://wa.me/573188367218" target="_blank" rel="noopener" data-es="Escribir por WhatsApp" data-en="Message on WhatsApp">Escribir por WhatsApp</a></p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var ATRIO = (location.hostname === 'localhost' && location.search.indexOf('prueba') > -1) ? 'http://127.0.0.1:8898' : 'https://atrio.infinitum.archi';
+  var API = ATRIO + '/api/publico/web-catalogo?linea=Verona%20Stone';
+  var ORIGEN = ATRIO;
+  var grid = document.getElementById('vs-grid'), filtros = document.getElementById('vs-filtros'), pie = document.getElementById('vs-pie'), wa = document.getElementById('vs-wa');
+  var datos = null, activo = 'Todos';
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]; }); }
+  function cop(n) { return '$' + Math.round(n).toLocaleString('es-CO'); }
+  function m2(n) { return (Math.round(n * 10) / 10).toLocaleString('es-CO', {minimumFractionDigits: 0, maximumFractionDigits: 1}) + ' m²'; }
+  function enlace(p) {
+    var tel = (datos && datos.contacto) || '573188367218';
+    var txt = 'Hola, me interesa ' + (p.nombre_venta || p.referencia) + ' (' + p.id + ') de Verona Stone. ¿Me cotizan?';
+    return 'https://wa.me/' + tel + '?text=' + encodeURIComponent(txt);
+  }
+  function tarjeta(p) {
+    var foto = p.foto ? '<img src="' + esc(ORIGEN + p.foto) + '" alt="' + esc((p.nombre_venta || p.referencia) + ', ' + p.familia) + '" loading="lazy" width="400" height="400">' : '';
+    var precio = p.precio_m2 ? '<div class="vs-precio"><b>' + cop(p.precio_m2) + '</b><span> por m², antes de IVA</span></div>' : '<div class="vs-precio"><span>Precio por consulta</span></div>';
+    var dato = [p.formato, p.espesor, p.terminado].filter(Boolean).map(esc).join(' · ');
+    return '<article class="vs-card"><div class="vs-img">' + foto + (p.tono ? '<b class="vs-tono">' + esc(p.tono) + '</b>' : '') + '</div>' +
+      '<div class="vs-txt"><h3>' + esc(p.nombre_venta || p.referencia) + '</h3>' +
+      '<div class="vs-meta">' + esc(p.familia) + '</div>' +
+      (dato ? '<div class="vs-dato">' + dato + '</div>' : '') +
+      (p.uso ? '<p>' + esc(p.uso) + '</p>' : '') + precio +
+      '<div class="vs-disp">Disponible: ' + m2(p.existencia_m2 || p.disponible_m2 || 0) + '</div>' +
+      '<a class="vs-cot" href="' + esc(enlace(p)) + '" target="_blank" rel="noopener">Cotizar esta lámina</a></div></article>';
+  }
+  function pintar() {
+    var lista = datos.productos.filter(function (p) { return activo === 'Todos' || p.familia === activo; });
+    grid.innerHTML = lista.length ? lista.map(tarjeta).join('') : '<p class="vs-estado">No hay láminas con ese formato por ahora.</p>';
+  }
+  function armarFiltros() {
+    var fam = ['Todos'];
+    datos.productos.forEach(function (p) { if (fam.indexOf(p.familia) < 0) fam.push(p.familia); });
+    filtros.innerHTML = fam.map(function (f) { return '<button type="button" data-f="' + esc(f) + '" class="' + (f === activo ? 'on' : '') + '">' + esc(f) + '</button>'; }).join('');
+    Array.prototype.forEach.call(filtros.querySelectorAll('button'), function (b) {
+      b.addEventListener('click', function () { activo = b.getAttribute('data-f'); armarFiltros(); pintar(); });
+    });
+  }
+  function falla() {
+    grid.innerHTML = '<p class="vs-estado">En este momento no podemos mostrar el catálogo. Escríbanos por WhatsApp y le enviamos las láminas disponibles con su precio.</p>';
+  }
+  fetch(API, {mode: 'cors'}).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+    datos = d;
+    if (d.contacto) wa.href = 'https://wa.me/' + d.contacto + '?text=' + encodeURIComponent('Hola, vi el catálogo de Verona Stone en infinitum.archi.');
+    armarFiltros(); pintar();
+    pie.textContent = (d.iva || '') + '. Existencias y precios al día de hoy, sujetos a disponibilidad al momento de la reserva.';
+  }).catch(falla);
+})();
+</script>
