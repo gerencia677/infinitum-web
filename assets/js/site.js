@@ -137,11 +137,26 @@
     try { localStorage.setItem(LANG_KEY, v); } catch (err) { /* modo privado, se ignora */ }
   }
 
+  /* Anos cumplidos: Infinitum nacio el 5 de abril de 2005. El numero cambia cada 5 de abril, en hora de Colombia. */
+  var PAL_ES = { 21: 'Veintiún', 22: 'Veintidós', 23: 'Veintitrés', 24: 'Veinticuatro', 25: 'Veinticinco', 26: 'Veintiséis', 27: 'Veintisiete', 28: 'Veintiocho', 29: 'Veintinueve', 30: 'Treinta' };
+  var PAL_EN = { 21: 'Twenty-one', 22: 'Twenty-two', 23: 'Twenty-three', 24: 'Twenty-four', 25: 'Twenty-five', 26: 'Twenty-six', 27: 'Twenty-seven', 28: 'Twenty-eight', 29: 'Twenty-nine', 30: 'Thirty' };
+  function aniosCumplidos() {
+    var n = ahoraBogota(), y, m, d;
+    if (n) { y = parseInt(n.fecha.slice(0, 4), 10); m = parseInt(n.fecha.slice(5, 7), 10); d = parseInt(n.fecha.slice(8, 10), 10); }
+    else { var h = new Date(); y = h.getFullYear(); m = h.getMonth() + 1; d = h.getDate(); }
+    return y - 2005 - ((m > 4 || (m === 4 && d >= 5)) ? 0 : 1);
+  }
+  function ponerTokens(txt) {
+    var n = aniosCumplidos();
+    return txt.replace(/\[\[ANIOS\]\]/g, String(n)).replace(/\[\[ANIOS_ES\]\]/g, PAL_ES[n] || String(n))
+      .replace(/\[\[ANIOS_EN\]\]/g, PAL_EN[n] || String(n)).replace(/\[\[HASTA\]\]/g, String(2005 + n));
+  }
+
   function applyLang(lang) {
     document.documentElement.setAttribute('lang', lang);
     Array.prototype.forEach.call(document.querySelectorAll('[data-es]'), function (el) {
       var txt = el.getAttribute('data-' + lang);
-      if (txt !== null && txt !== undefined) { el.textContent = txt; }
+      if (txt !== null && txt !== undefined) { el.textContent = ponerTokens(txt); }
     });
     Array.prototype.forEach.call(document.querySelectorAll('[data-ph-es]'), function (el) {
       var ph = el.getAttribute('data-ph-' + lang);
@@ -273,12 +288,18 @@
   pintarEstado();
   setInterval(pintarEstado, 60000);
 
-  /* ---------- 8. Los anos de trayectoria siguen al calendario (fundada el 5-jun-2005) ---------- */
-  (function () {
-    var anios = new Date().getFullYear() - 2005;
-    Array.prototype.forEach.call(document.querySelectorAll('[data-anios]'), function (el) { el.textContent = String(anios); });
-    Array.prototype.forEach.call(document.querySelectorAll('.sello__v em'), function (el) { el.innerHTML = '2005<br>' + new Date().getFullYear(); });
-  })();
+  /* ---------- 8. Los anos de trayectoria: el numero cambia solo cada 5 de abril ---------- */
+  function pintarAnios() {
+    var n = aniosCumplidos();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-anios]'), function (el) { el.textContent = String(n); });
+    Array.prototype.forEach.call(document.querySelectorAll('.sello__v em'), function (el) { el.innerHTML = '2005<br>' + (2005 + n); });
+    var sello = document.querySelector('.sello');
+    if (sello) { sello.setAttribute('aria-label', n + ' años de trayectoria, desde 2005'); }
+    applyLang(readLang());
+  }
+  pintarAnios();
+  setInterval(function () { if (aniosCumplidos() !== window.__aniosPintados) { window.__aniosPintados = aniosCumplidos(); pintarAnios(); } }, 600000);
+  window.__aniosPintados = aniosCumplidos();
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-year]'), function (el) {
     el.textContent = String(new Date().getFullYear());

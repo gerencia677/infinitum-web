@@ -613,18 +613,20 @@ img { max-width: 100%; }
 .pilar a { display: inline-block; margin-top: 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; border-bottom: 1px solid var(--gold); padding-bottom: 3px; }
 .pilar a:hover { color: var(--navy); }
 
-/* Sello de los 21 años: canto vertical en el borde derecho, en todas las páginas (9-oct-2026) */
-.sello { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 70; display: block; background: rgba(20, 33, 61, 0.88); border-left: 1px solid var(--gold); border-radius: 3px 0 0 3px; color: var(--gold); text-align: center; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+/* Sello de los años de trayectoria: canto vertical en el borde derecho, en todas las páginas (9-oct-2026).
+   Crece con la pantalla (10 px en celular, hasta 15 px en pantallas grandes) para que siempre se vea. */
+.sello { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 70; display: block; font-size: clamp(10px, 0.82vw, 15px); background: rgba(20, 33, 61, 0.94); border: 1px solid var(--gold); border-right: 0; border-radius: 3px 0 0 3px; color: var(--gold); text-align: center; box-shadow: 0 6px 24px rgba(20, 33, 61, 0.35); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .sello:hover { background: var(--navy); }
-.sello__v { display: block; width: 54px; padding: 16px 0 14px; }
-.sello__v i { display: block; height: 1px; margin: 0 8px; background: linear-gradient(var(--gold), var(--gold)); }
-.sello__v b { display: block; margin: 10px 0 2px; font-size: 30px; font-weight: 200; line-height: 1; letter-spacing: 0.02em; color: var(--gold); }
-.sello__v span { display: block; margin-bottom: 11px; font-size: 7.5px; font-weight: 500; letter-spacing: 0.26em; text-indent: 0.26em; color: #E8D5A8; }
-.sello__v em { display: block; margin-top: 10px; font-style: normal; font-size: 7.5px; letter-spacing: 0.14em; line-height: 1.7; color: #9AA2B4; }
+.sello__v { display: block; width: 6em; padding: 1.7em 0 1.5em; }
+.sello__v i { display: block; height: 1px; margin: 0 0.9em; background: linear-gradient(var(--gold), var(--gold)); }
+.sello__v b { display: block; margin: 0.55em 0 0.1em; font-size: 3.3em; font-weight: 200; line-height: 1; letter-spacing: 0.02em; color: var(--gold); }
+.sello__v span { display: block; margin-bottom: 1.1em; font-size: 0.8em; font-weight: 500; letter-spacing: 0.26em; text-indent: 0.26em; color: #E8D5A8; }
+.sello__v em { display: block; margin-top: 1em; font-style: normal; font-size: 0.8em; letter-spacing: 0.14em; line-height: 1.7; color: #B8BFCF; }
 .sello__h { display: none; }
-@media (max-width: 700px) {
+@media (max-width: 520px) {
+  .sello { font-size: 10px; }
   .sello__v { display: none; }
-  .sello__h { display: block; writing-mode: vertical-rl; padding: 14px 0; width: 20px; font-size: 8.5px; font-weight: 500; letter-spacing: 0.22em; white-space: nowrap; color: #E8D5A8; }
-  .sello__h b { font-weight: 500; color: var(--gold); }
+  .sello__h { display: block; writing-mode: vertical-rl; padding: 1.4em 0; width: 2.5em; font-size: 1em; font-weight: 500; letter-spacing: 0.22em; white-space: nowrap; color: #E8D5A8; }
+  .sello__h b { font-weight: 600; color: var(--gold); }
 }
 @media print { .sello { display: none; } }

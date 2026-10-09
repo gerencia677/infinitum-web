@@ -17,6 +17,7 @@ import re
 import shutil
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
@@ -24,6 +25,44 @@ PLANTILLA = RAIZ / "templates" / "base.html"
 PAGINAS = RAIZ / "pages"
 ASSETS = RAIZ / "assets"
 SALIDA = RAIZ / "docs"   # docs/ es la carpeta que GitHub Pages publica sola
+
+# ---------- Años de trayectoria ----------
+# Infinitum nació el 5 de abril de 2005 (orden de Juan David, 9-oct-2026). El año cumplido cambia
+# cada 5 de abril. La página lo recalcula sola en el navegador; esto deja bien el HTML que se
+# construye y las descripciones que leen Google y WhatsApp.
+FUND_ANIO, FUND_MES, FUND_DIA = 2005, 4, 5
+PALABRAS_ES = {21: "Veintiún", 22: "Veintidós", 23: "Veintitrés", 24: "Veinticuatro", 25: "Veinticinco",
+               26: "Veintiséis", 27: "Veintisiete", 28: "Veintiocho", 29: "Veintinueve", 30: "Treinta"}
+PALABRAS_EN = {21: "Twenty-one", 22: "Twenty-two", 23: "Twenty-three", 24: "Twenty-four", 25: "Twenty-five",
+               26: "Twenty-six", 27: "Twenty-seven", 28: "Twenty-eight", 29: "Twenty-nine", 30: "Thirty"}
+
+
+def anios_cumplidos(hoy=None):
+    if hoy is None:
+        hoy = datetime.now(timezone(timedelta(hours=-5)))  # hora de Colombia
+    return hoy.year - FUND_ANIO - (0 if (hoy.month, hoy.day) >= (FUND_MES, FUND_DIA) else 1)
+
+
+def valores_anios():
+    n = anios_cumplidos()
+    return {"[[ANIOS]]": str(n), "[[ANIOS_ES]]": PALABRAS_ES.get(n, str(n)),
+            "[[ANIOS_EN]]": PALABRAS_EN.get(n, str(n)), "[[HASTA]]": str(FUND_ANIO + n)}
+
+
+def poner_anios(texto):
+    """Cambia los marcadores [[ANIOS]] solo en el texto visible, en aria-label y en meta content.
+    Los atributos data-es y data-en conservan el marcador: el navegador lo resuelve al cambiar de idioma."""
+    v = valores_anios()
+
+    def cambiar(t):
+        for k, x in v.items():
+            t = t.replace(k, x)
+        return t
+
+    texto = re.sub(r">([^<>]*)<", lambda m: ">" + cambiar(m.group(1)) + "<", texto)
+    texto = re.sub(r'(aria-label|content)="([^"]*)"', lambda m: '{}="{}"'.format(m.group(1), cambiar(m.group(2))), texto)
+    return texto
+
 
 CABECERA = re.compile(r"^<!--\s*(.*?)\s*-->", re.DOTALL)
 SELLO = ""
@@ -76,6 +115,7 @@ def main():
         html = html.replace("{{SLUG}}", datos.get("slug", pag.name))
         html = html.replace("{{HDR_MOD}}", datos.get("hdr", ""))
         html = html.replace("{{CONTENT}}", cuerpo)
+        html = poner_anios(html)
         # Sello de version en css y js. Sin esto el navegador se queda con
         # la copia vieja y uno jura que el cambio no sirvio.
         html = html.replace("assets/css/site.css", "assets/css/site.css?v=" + SELLO)
