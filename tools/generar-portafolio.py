@@ -90,9 +90,9 @@ title: Portafolio — Infinitum
 desc: Obra y diseño por línea de negocio, de Medellín a Miami.
 slug: portafolio.html
 -->
-<section class="phero"><img src="{P}perfume.jpg" alt="" aria-hidden="true"><div class="phero__in"><p class="eyebrow">PORTAFOLIO</p><h1>Diseñado, licenciado, construido.</h1><p>Una selección de lo que hemos hecho, por línea de negocio. Cada proyecto dice en qué etapa está y qué hicimos en él.</p></div></section>
+<section class="phero"><img src="{P}perfume.jpg" alt="" aria-hidden="true"><div class="phero__in"><p class="eyebrow">PORTAFOLIO</p><h1>Diseñado, construido, fabricado.</h1><p>Una selección de lo que hemos hecho, por línea de negocio. Cada proyecto dice en qué etapa está y qué hicimos en él.</p></div></section>
 <section><div class="wrap"><nav class="pf-nav" aria-label="Líneas de negocio">{nav}</nav>
-<div class="pf-leyenda"><span><i>Construido</i>obra entregada</span><span><i>En ejecución</i>obra en curso</span><span><i>Diseñado</i>proyecto entregado</span><span><i>Licenciado</i>con licencia aprobada</span></div></div></section>
+<div class="pf-leyenda"><span><i>Construido</i>obra entregada</span><span><i>En ejecución</i>obra en curso</span><span><i>Diseñado</i>proyecto entregado</span><span><i>Fabricado</i>mueble hecho en nuestra planta</span></div></div></section>
 '''
 tail='<section class="on-dark"><div class="wrap center"><h2 class="big">¿Tiene un proyecto parecido?</h2><p><a class="pill pill--gold" href="contacto.html">Cotizar</a></p></div></section>'
 open("borradores/portafolio.html","w").write(head+"\n".join(out)+"\n"+tail)
