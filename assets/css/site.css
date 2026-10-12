@@ -670,3 +670,12 @@ img { max-width: 100%; }
 
 .contact-list .contacto__persona { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: var(--text-soft); }
 .contact-list .contacto__persona a { color: var(--navy); border-bottom: 1px solid var(--line); }
+
+/* Lema y bajada por línea de negocio: el bloque no salta cuando cambian de largo */
+.hero__eyebrow { text-align: center; max-width: min(92vw, 820px); min-height: 2.6em; }
+.hero__eyebrow::before, .hero__eyebrow::after { flex: none; }
+.hero__lead { min-height: 3em; }
+.hero__lineas { display: none; }
+@media (max-width: 760px) { .hero__lead { min-height: 6em; } .hero__eyebrow::before, .hero__eyebrow::after { width: 16px; } }
+
+@media (max-width: 520px) { .hero__eyebrow::before, .hero__eyebrow::after { display: none; } }
