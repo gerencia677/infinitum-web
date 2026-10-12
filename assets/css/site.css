@@ -634,3 +634,7 @@ img { max-width: 100%; }
   .sello__h b { font-weight: 600; color: var(--gold); }
 }
 @media print { .sello { display: none; } }
+
+/* Bajada del héroe: una frase que dice qué hacemos y para quién */
+.hero__lead { max-width: min(680px, 88vw); margin: 20px auto 0; font-size: clamp(15px, 1.7vw, 20px); font-weight: 300; line-height: 1.5; color: rgba(255,255,255,0.92); text-shadow: 0 1px 10px rgba(20,33,61,.75); }
+.hero__ctas .pill { text-shadow: none; }
