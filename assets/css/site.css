@@ -699,3 +699,6 @@ img { max-width: 100%; }
 .lb__x { position: absolute; top: 14px; right: 18px; font-size: 38px; line-height: 1; color: var(--gold); padding: 6px 12px; }
 @media (max-width: 860px) { .pv__cab { grid-template-columns: 1fr; } .pv__galeria { column-count: 2; } }
 @media (max-width: 520px) { .pv__galeria { column-count: 1; } }
+
+.pv__galeria--dos { column-count: 2; }
+@media (max-width: 520px) { .pv__galeria--dos { column-count: 1; } }
