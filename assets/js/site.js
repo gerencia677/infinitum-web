@@ -64,10 +64,10 @@
       if (word) {
         var label = slides[i].getAttribute('data-label') || '';
         if (word.textContent.trim() === label) { return; }   // ya dice eso, no parpadea
-        var lema = hero.querySelector('.hero__eyebrow'), bajada = hero.querySelector('.hero__lead');
+        var lema = hero.querySelector('.hero__eyebrow'), bajada = hero.querySelector('.hero__lead'), boton = document.getElementById('hero-boton');
         var datos = hero.querySelector('.hero__lineas [data-linea="' + label + '"]');
         var lang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
-        [word, lema, bajada].forEach(function (e) { if (e) { e.style.opacity = '0'; } });
+        [word, lema, bajada, boton].forEach(function (e) { if (e) { e.style.opacity = '0'; } });
         setTimeout(function () {
           word.textContent = label;
           if (datos && lema) {
@@ -78,7 +78,11 @@
             bajada.setAttribute('data-es', datos.getAttribute('data-bajada-es')); bajada.setAttribute('data-en', datos.getAttribute('data-bajada-en'));
             bajada.textContent = datos.getAttribute('data-bajada-' + lang);
           }
-          [word, lema, bajada].forEach(function (e) { if (e) { e.style.opacity = '1'; } });
+          if (datos && boton) {
+            boton.setAttribute('data-es', datos.getAttribute('data-boton-es')); boton.setAttribute('data-en', datos.getAttribute('data-boton-en'));
+            boton.textContent = datos.getAttribute('data-boton-' + lang); boton.setAttribute('href', datos.getAttribute('data-boton-href'));
+          }
+          [word, lema, bajada, boton].forEach(function (e) { if (e) { e.style.opacity = '1'; } });
         }, 320);
       }
     }
@@ -90,7 +94,7 @@
       d.addEventListener('click', function () { show(k); start(); });
     });
 
-    [word, hero.querySelector('.hero__eyebrow'), hero.querySelector('.hero__lead')].forEach(function (e) { if (e) { e.style.transition = 'opacity 0.32s ease'; } });
+    [word, hero.querySelector('.hero__eyebrow'), hero.querySelector('.hero__lead'), document.getElementById('hero-boton')].forEach(function (e) { if (e) { e.style.transition = 'opacity 0.32s ease'; } });
     show(0);
     start();
 
@@ -115,6 +119,17 @@
         c.classList.toggle('hide', !show);
       });
     });
+  }
+
+  if (filters) {
+    var desdeEnlace = function () {
+      var h = (location.hash || '').replace('#', '');
+      if (!h) { return; }
+      var b = filters.querySelector('button[data-cat="' + h + '"]');
+      if (b) { b.click(); }
+    };
+    desdeEnlace();
+    window.addEventListener('hashchange', desdeEnlace);
   }
 
   /* ---------- 5. Aparicion al hacer scroll ---------- */
