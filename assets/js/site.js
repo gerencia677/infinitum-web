@@ -243,9 +243,9 @@
   var DIAS_ES = ['el domingo', 'el lunes', 'el martes', 'el miércoles', 'el jueves', 'el viernes', 'el sábado'];
   var DIAS_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  function ahoraBogota() {
+  function ahoraBogota(zona) {
     try {
-      var f = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit',
+      var f = new Intl.DateTimeFormat('en-CA', { timeZone: zona || 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit',
         hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short' }).formatToParts(new Date());
       var o = {}; f.forEach(function (p) { o[p.type] = p.value; });
       var dias = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
@@ -258,32 +258,42 @@
   }
   function laboral(fecha, dia) { return HORARIO[dia] && FESTIVOS.indexOf(fecha) === -1; }
 
-  function pintarEstado() {
-    var els = document.querySelectorAll('[data-estado]');
-    if (!els.length) { return; }
-    var n = ahoraBogota();
-    if (!n) { return; }
-    var h = laboral(n.fecha, n.dia) ? HORARIO[n.dia] : null;
-    var es, en, abierto = !!(h && n.min >= h[0] && n.min < h[1]);
-    if (abierto) {
-      es = 'Atendemos ahora'; en = 'We are available now';
-    } else {
-      var cuando_es, cuando_en;
-      if (h && n.min < h[0]) { cuando_es = 'hoy'; cuando_en = 'today'; }
-      else {
-        var k = 1, s = sumarDia(n.fecha, 1);
-        while (!laboral(s.fecha, s.dia) && k < 8) { k += 1; s = sumarDia(n.fecha, k); }
-        cuando_es = (k === 1) ? 'mañana' : DIAS_ES[s.dia]; cuando_en = (k === 1) ? 'tomorrow' : DIAS_EN[s.dia];
-      }
-      es = 'Fuera de horario. Le respondemos ' + cuando_es + ' desde las 8:00 a. m.';
-      en = 'Outside office hours. We reply ' + cuando_en + ' from 8:00 am.';
+  /* Miami: lunes a viernes de 8:00 a. m. a 4:00 p. m., hora del Este. No se cargan festivos de Estados Unidos: no hay una regla dada. */
+  var HORARIO_MIAMI = { 1: [480, 960], 2: [480, 960], 3: [480, 960], 4: [480, 960], 5: [480, 960] };
+
+  function textoEstado(n, HOR, FEST, reglaDe, cierre_es, cierre_en) {
+    var h = (HOR[n.dia] && FEST.indexOf(n.fecha) === -1) ? HOR[n.dia] : null;
+    var abierto = !!(h && n.min >= h[0] && n.min < h[1]);
+    if (abierto) { return { abierto: true, es: 'Atendemos ahora', en: 'We are available now' }; }
+    var cuando_es, cuando_en;
+    if (h && n.min < h[0]) { cuando_es = 'hoy'; cuando_en = 'today'; }
+    else {
+      var k = 1, s = sumarDia(n.fecha, 1);
+      while (!(HOR[s.dia] && FEST.indexOf(s.fecha) === -1) && k < 8) { k += 1; s = sumarDia(n.fecha, k); }
+      cuando_es = (k === 1) ? 'mañana' : DIAS_ES[s.dia]; cuando_en = (k === 1) ? 'tomorrow' : DIAS_EN[s.dia];
     }
+    return { abierto: false, es: 'Fuera de horario. ' + cierre_es.replace('{cuando}', cuando_es), en: 'Outside office hours. ' + cierre_en.replace('{cuando}', cuando_en) };
+  }
+
+  function pintarEstado() {
     var lang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
-    Array.prototype.forEach.call(els, function (el) {
-      el.setAttribute('data-es', es); el.setAttribute('data-en', en);
-      el.textContent = lang === 'en' ? en : es;
-      el.classList.toggle('off', !abierto);
-    });
+    function poner(sel, r) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) {
+        el.setAttribute('data-es', r.es); el.setAttribute('data-en', r.en);
+        el.textContent = lang === 'en' ? r.en : r.es;
+        el.classList.toggle('off', !r.abierto);
+      });
+    }
+    var co = ahoraBogota('America/Bogota');
+    if (co && document.querySelector('[data-estado]')) {
+      poner('[data-estado]', textoEstado(co, HORARIO, FESTIVOS, null, 'Le respondemos {cuando} desde las 8:00 a. m.', 'We reply {cuando} from 8:00 am.'));
+    }
+    var mi = ahoraBogota('America/New_York');
+    if (mi && document.querySelector('[data-estado-miami]')) {
+      var r = textoEstado(mi, HORARIO_MIAMI, [], null, 'Abrimos {cuando} a las 8:00 a. m., hora de Miami.', 'We open {cuando} at 8:00 am, Miami time.');
+      if (r.abierto) { r.es = 'Atendemos ahora, hora de Miami'; r.en = 'We are open now, Miami time'; }
+      poner('[data-estado-miami]', r);
+    }
   }
   pintarEstado();
   setInterval(pintarEstado, 60000);

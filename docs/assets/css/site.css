@@ -646,3 +646,27 @@ img { max-width: 100%; }
 
 /* Velo suave detrás del bloque de texto del héroe: el lema dorado se lee igual sobre foto clara u oscura */
 .hero__inner::before { content: ''; position: absolute; left: 50%; top: 50%; width: min(980px, 96vw); height: min(560px, 70svh); transform: translate(-50%, -50%); background: radial-gradient(ellipse at center, rgba(20,33,61,.5) 0%, rgba(20,33,61,.32) 45%, rgba(20,33,61,0) 72%); pointer-events: none; z-index: -1; }
+
+/* ===== Franja «Para empresas» ===== */
+.empresas { padding-top: clamp(56px, 8vw, 110px); padding-bottom: clamp(56px, 8vw, 110px); }
+.empresas .lead { max-width: 760px; color: var(--text-on-dark); text-align: justify; hyphens: auto; }
+.emp__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 34px); margin-top: clamp(30px, 4vw, 52px); }
+.emp__card { border-top: 1px solid var(--gold); padding-top: 18px; }
+.emp__card h3 { margin: 0 0 8px; font-size: clamp(17px, 1.7vw, 22px); font-weight: 300; color: var(--white); }
+.emp__card p { margin: 0; font-size: 14px; font-weight: 300; color: var(--text-on-dark); text-align: justify; hyphens: auto; }
+.emp__cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: clamp(34px, 5vw, 64px); background: var(--line-light); border: 1px solid var(--line-light); }
+.emp__cifras > div { background: var(--navy); padding: clamp(18px, 2.2vw, 30px); display: flex; flex-direction: column; gap: 6px; }
+.emp__cifras b { font-size: clamp(28px, 3.4vw, 46px); font-weight: 200; color: var(--gold); letter-spacing: -0.01em; line-height: 1; }
+.emp__cifras span { font-size: 12px; letter-spacing: 0.08em; color: var(--text-on-dark); }
+.emp__cta { margin: clamp(28px, 4vw, 48px) 0 0; }
+@media (max-width: 900px) { .emp__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .emp__cifras { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .emp__grid { grid-template-columns: 1fr; } }
+
+/* En celular el sello de años queda sobre el borde derecho: el texto deja su sitio y no se corta */
+@media (max-width: 760px) { .wrap { padding-right: 40px; } .hdr, .ftr .wrap { padding-right: var(--gutter); } .ftr .wrap { padding-right: 40px; } }
+
+.contact-list .horario__tipo { margin: 0 0 6px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; }
+
+.contact-list .contacto__persona { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: var(--text-soft); }
+.contact-list .contacto__persona a { color: var(--navy); border-bottom: 1px solid var(--line); }
