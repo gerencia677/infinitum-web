@@ -132,6 +132,18 @@
     window.addEventListener('hashchange', desdeEnlace);
   }
 
+  /* Visor de fotos de Puntos de venta */
+  var lb = document.getElementById('lb');
+  if (lb) {
+    var lbImg = lb.querySelector('.lb__img');
+    var cerrarLb = function () { lb.hidden = true; lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lb]'), function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); lbImg.src = a.getAttribute('href'); lbImg.alt = (a.querySelector('img') || {}).alt || ''; lb.hidden = false; lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; });
+    });
+    lb.addEventListener('click', cerrarLb);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) { cerrarLb(); } });
+  }
+
   /* ---------- 5. Aparicion al hacer scroll ---------- */
 
   var risers = document.querySelectorAll('.rise');
