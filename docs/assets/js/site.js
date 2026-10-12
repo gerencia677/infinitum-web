@@ -169,6 +169,10 @@
   var LANG_KEY = 'infinitum-lang';
 
   function readLang() {
+    try {
+      var q = (location.search.match(/[?&]lang=(es|en)\b/) || [])[1];
+      if (q) { localStorage.setItem(LANG_KEY, q); return q; }
+    } catch (err) { /* sin almacenamiento, se sigue */ }
     try { return localStorage.getItem(LANG_KEY) || 'es'; } catch (err) { return 'es'; }
   }
   function saveLang(v) {
