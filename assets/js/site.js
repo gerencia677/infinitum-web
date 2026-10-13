@@ -249,8 +249,8 @@
       ok.innerHTML =
         '<h3>' + (en ? 'Almost done' : 'Casi listo') + '</h3>' +
         '<p>' + (en
-          ? 'Your message is ready. Choose how to send it. We reply within 12 business hours.'
-          : 'Su mensaje está listo. Elija cómo enviarlo. Le respondemos en menos de 12 horas hábiles.') + '</p>' +
+          ? 'Your message is ready. Choose how to send it.'
+          : 'Su mensaje está listo. Elija cómo enviarlo.') + '</p>' +
         '<div class="form-ok__btns">' +
         '<a class="pill pill--gold" href="' + mail + '">' + (en ? 'Open my email' : 'Abrir mi correo') + '</a>' +
         '<a class="pill" style="background:var(--navy);color:#fff" href="' + wa + '" target="_blank" rel="noopener">' + (en ? 'Send on WhatsApp' : 'Enviar por WhatsApp') + '</a>' +
