@@ -702,3 +702,11 @@ img { max-width: 100%; }
 
 .pv__galeria--dos { column-count: 2; }
 @media (max-width: 520px) { .pv__galeria--dos { column-count: 1; } }
+
+/* ---------- Fachadas: tarjetas de experiencia ---------- */
+.fx__obras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 34px); margin-top: clamp(26px, 3.4vw, 46px); }
+.fx__obras > div { border-top: 1px solid var(--gold-dark, #8A6D1D); padding-top: 18px; }
+.fx__obras b { display: block; font-size: 11px; letter-spacing: 0.24em; font-weight: 600; color: #8A6D1D; margin-bottom: 10px; }
+.fx__obras h3 { margin: 0 0 8px; font-size: clamp(20px, 2vw, 26px); font-weight: 300; }
+.fx__obras p { margin: 0; text-align: justify; hyphens: auto; }
+@media (max-width: 760px) { .fx__obras { grid-template-columns: 1fr; } }
