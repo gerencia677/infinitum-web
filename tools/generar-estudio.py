@@ -95,7 +95,7 @@ def seccion(id_, fondo, eb, titulo, texto, chips, items, imgs, cta):
 
 
 P = ['''<!--
-title: Estudio de Arquitectura — Infinitum
+title: Arquitectura — Infinitum Estudio de Arquitectura
 desc: Arquitectura para vivir, trabajar y vender. Estudio con [[ANIOS]] años de trayectoria: espacios residenciales, corporativos y puntos de venta, con un solo equipo del primer trazo a la obra terminada.
 slug: estudio-de-arquitectura.html
 robots: noindex
