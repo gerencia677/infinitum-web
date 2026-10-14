@@ -756,3 +756,29 @@ img { max-width: 100%; }
 /* ---------- Monolith Doors: marca de línea ---------- */
 .md-marca { margin: 0 0 18px; font-size: clamp(22px, 3.2vw, 40px); font-weight: 200; letter-spacing: 0.5em; text-indent: 0.5em; color: var(--gold); text-transform: uppercase; display: inline-block; padding: 14px 0 14px 0.5em; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
 @media (max-width: 560px) { .md-marca { letter-spacing: 0.32em; font-size: 20px; } }
+
+/* ---------- Puertas: tabla de pesos, catálogo, consideraciones ---------- */
+.fx__tabla { margin-top: clamp(22px, 3vw, 40px); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.fx__tabla table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 14px; }
+.fx__tabla thead th { background: var(--navy); color: #fff; font-weight: 400; letter-spacing: .08em; padding: 14px 12px; text-align: center; vertical-align: middle; }
+.fx__tabla thead th:first-child { text-align: center; }
+.fx__tabla tbody th { text-align: left; font-weight: 300; padding: 14px 12px; vertical-align: middle; border-bottom: 1px solid rgba(138,109,29,.35); }
+.fx__tabla tbody td { text-align: center; vertical-align: middle; padding: 14px 12px; border-bottom: 1px solid rgba(138,109,29,.35); font-variant-numeric: tabular-nums; }
+.fx__mods { display: grid; gap: clamp(26px, 3.4vw, 52px); margin-top: clamp(26px, 3vw, 44px); }
+.fx__mod { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); align-items: center; }
+.fx__mod:nth-child(even) .fx__mod__img { order: 2; }
+.fx__mod__img { display: block; overflow: hidden; aspect-ratio: 3 / 2; background: var(--navy); cursor: zoom-in; }
+.fx__mod__img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.fx__mod__img:hover img { transform: scale(1.03); }
+.fx__mod__txt h3 { margin: 6px 0 10px; font-size: clamp(22px, 2.4vw, 32px); font-weight: 300; }
+.fx__mod__txt p { text-align: justify; hyphens: auto; }
+.fx__mod dl { margin: 16px 0 0; border-top: 1px solid rgba(138,109,29,.45); }
+.fx__mod dl > div { display: grid; grid-template-columns: 9em 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(138,109,29,.25); }
+.fx__mod dt { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8A6D1D; }
+.fx__mod dd { margin: 0; font-weight: 300; }
+.fx__obras--dark > div { border-top-color: var(--gold); }
+.fx__obras--dark b { color: var(--gold); }
+.fx__obras--dark h3 { color: var(--white); }
+.fx__obras--dark p { color: var(--text-on-dark); }
+@media (max-width: 900px) { .fx__mod { grid-template-columns: 1fr; } .fx__mod:nth-child(even) .fx__mod__img { order: 0; } }
+@media (max-width: 760px) { .fx__obras--dark { grid-template-columns: 1fr; } }
