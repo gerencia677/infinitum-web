@@ -750,3 +750,5 @@ img { max-width: 100%; }
 @media (max-width: 860px) { .puertas--fx .puerta p { min-height: 0; } }
 .puertas--fx .puerta h3 { min-height: 2.25em; }
 @media (max-width: 860px) { .puertas--fx .puerta h3 { min-height: 0; } }
+
+.fx__disp { margin-top: 18px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
