@@ -110,7 +110,7 @@ slug: estudio-de-arquitectura.html
 
 # 1. Portada
 P.append(f'''<section class="phero" style="min-height:clamp(520px,88vh,880px)">
-  <img src="assets/img/estudio/res-fachada.jpg" alt="" aria-hidden="true">
+  <img src="assets/img/estudio/res-sala.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eyebrow("ESTUDIO DE ARQUITECTURA", "ARCHITECTURE STUDIO")}
     {h(1, "Arquitectura para vivir, trabajar y vender.", "Architecture to live, work and sell.")}
