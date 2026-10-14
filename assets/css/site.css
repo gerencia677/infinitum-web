@@ -834,7 +834,7 @@ img { max-width: 100%; }
 .ar4 p{font-size:14px;opacity:.82;line-height:1.55;margin:0;text-align:left}
 .ar-fichas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,34px);margin-top:8px}
 .ar-ficha{display:block;color:inherit}
-.ar-ficha figure{margin:0;overflow:hidden;aspect-ratio:4/5;background:#14213D}
+.ar-ficha figure{margin:0;overflow:hidden;aspect-ratio:4/3;background:#14213D}
 .ar-ficha img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 .ar-ficha:hover img{transform:scale(1.04)}
 .ar-ficha h3{font-weight:300;font-size:clamp(20px,2vw,26px);margin:18px 0 10px;line-height:1.25}
