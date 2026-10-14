@@ -782,3 +782,10 @@ img { max-width: 100%; }
 .fx__obras--dark p { color: var(--text-on-dark); }
 @media (max-width: 900px) { .fx__mod { grid-template-columns: 1fr; } .fx__mod:nth-child(even) .fx__mod__img { order: 0; } }
 @media (max-width: 760px) { .fx__obras--dark { grid-template-columns: 1fr; } }
+
+/* ---------- Portada: diez imágenes en el carrusel ---------- */
+@media (max-width: 760px) {
+  .hero__dots { gap: 6px; }
+  .hero__dots button { width: 15px; }
+}
+@media (max-width: 360px) { .hero__dots button { width: 12px; } }
