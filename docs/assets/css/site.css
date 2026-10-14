@@ -752,3 +752,7 @@ img { max-width: 100%; }
 @media (max-width: 860px) { .puertas--fx .puerta h3 { min-height: 0; } }
 
 .fx__disp { margin-top: 18px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+
+/* ---------- Monolith Doors: marca de línea ---------- */
+.md-marca { margin: 0 0 18px; font-size: clamp(22px, 3.2vw, 40px); font-weight: 200; letter-spacing: 0.5em; text-indent: 0.5em; color: var(--gold); text-transform: uppercase; display: inline-block; padding: 14px 0 14px 0.5em; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+@media (max-width: 560px) { .md-marca { letter-spacing: 0.32em; font-size: 20px; } }
