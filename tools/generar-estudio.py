@@ -73,7 +73,7 @@ def svc(n, tt, d):
 
 def galeria(imgs, cols=3):
     o = "".join(f'<a href="{i}" data-lb><img src="{i}" alt="{escape(al)}" loading="lazy"></a>' for i, al in imgs)
-    return f'<div class="fx__rej fx__rej--ancha rise" style="--c:{cols}">{o}</div>'
+    return f'<div class="gal-ed gal-ed--3 rise">{o}</div>'
 
 
 def faq(items):

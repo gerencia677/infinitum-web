@@ -57,18 +57,38 @@ def vineta(im, fuerza=0.14):
     oscuro = ImageChops.multiply(im, Image.new("RGB", im.size, (205, 205, 215)))
     return Image.composite(Image.blend(im, oscuro, fuerza * 3), im, m)
 
+def calido(im, fuerza=0.035):
+    """Filtro corporativo calido de Infinitum: luces apenas doradas, sombras limpias."""
+    r, g, b = im.split()
+    r = r.point(lambda v: min(255, int(v * (1 + fuerza))))
+    b = b.point(lambda v: int(v * (1 - fuerza * 0.9)))
+    return Image.merge("RGB", (r, g, b))
+
+
+def recortar(im, relacion=(3, 2), foco=(0.5, 0.5)):
+    """Recorte limpio a una relacion fija, alrededor del foco (x, y en 0 a 1)."""
+    w, h = im.size
+    rw, rh = relacion
+    if w / h > rw / rh:
+        nw = round(h * rw / rh); x0 = min(max(round(foco[0] * w - nw / 2), 0), w - nw)
+        return im.crop((x0, 0, x0 + nw, h))
+    nh = round(w * rh / rw); y0 = min(max(round(foco[1] * h - nh / 2), 0), h - nh)
+    return im.crop((0, y0, w, y0 + nh))
+
+
 def retocar(im, modo="interior", ancho=2560):
     im = ImageOps.exif_transpose(im).convert("RGB")
     im = im.filter(ImageFilter.GaussianBlur(0.8))                    # limpia la compresión de WhatsApp
     im = im.resize((ancho, round(im.height * ancho / im.width)), Image.LANCZOS)
     im = balance_blancos(im, 0.5 if modo == "interior" else 0.35)
     im = ImageOps.autocontrast(im, cutoff=0.25)
-    im = curva(im, sombras=0.07, luces=0.04, s=0.10)
+    im = curva(im, sombras=0.10, luces=0.04, s=0.08)
     im = claridad(im, 40, 22)
     im = vibrance(im, 0.26 if modo == "interior" else 0.18)
     if modo == "interior":
         pass
     im = vineta(im, 0.07)
+    im = calido(im)
     im = im.filter(ImageFilter.UnsharpMask(radius=1.3, percent=85, threshold=2))   # nitidez final
     return im
 
