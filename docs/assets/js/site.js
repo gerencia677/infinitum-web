@@ -82,6 +82,8 @@
             boton.setAttribute('data-es', datos.getAttribute('data-boton-es')); boton.setAttribute('data-en', datos.getAttribute('data-boton-en'));
             boton.textContent = datos.getAttribute('data-boton-' + lang); boton.setAttribute('href', datos.getAttribute('data-boton-href'));
           }
+          /* Safari dejaba restos del texto anterior fuera del nuevo: se fuerza el repintado completo */
+          [word, lema, bajada].forEach(function (e) { if (e) { e.style.display = 'none'; void e.offsetHeight; e.style.display = ''; } });
           [word, lema, bajada, boton].forEach(function (e) { if (e) { e.style.opacity = '1'; } });
         }, 320);
       }

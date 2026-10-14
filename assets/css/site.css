@@ -789,3 +789,12 @@ img { max-width: 100%; }
   .hero__dots button { width: 15px; }
 }
 @media (max-width: 360px) { .hero__dots button { width: 12px; } }
+
+/* ---------- Portada en Safari: sin restos del texto anterior ----------
+   Safari dejaba pegados los extremos de la palabra y del lema anteriores cuando el texto
+   nuevo era más corto (se veía «( FACHADAS )»). Cada línea ocupa todo el ancho y vive en su
+   propia capa, así el cambio la repinta completa. */
+.hero__word, .hero__eyebrow, .hero__lead { width: 100%; max-width: 100%; will-change: opacity; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); }
+.hero__eyebrow { max-width: min(92vw, 820px); }
+.hero__lead { max-width: min(680px, 88vw); }
+.hero__word { overflow: visible; }
