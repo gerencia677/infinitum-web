@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Genera pages/estudio-de-arquitectura.html (borrador paralelo, noindex, sin enlace en el menu).
 Se corre: python3 tools/generar-estudio.py && python3 build.py
-Para publicarla de verdad: quitar la linea `robots: noindex` y sumarla al menu en templates/base.html."""
+Para publicarla de verdad: quitar la linea `` y sumarla al menu en templates/base.html."""
 from html import escape
 from pathlib import Path
 
@@ -98,7 +98,6 @@ P = ['''<!--
 title: Arquitectura — Infinitum Estudio de Arquitectura
 desc: Arquitectura para vivir, trabajar y vender. Estudio con [[ANIOS]] años de trayectoria: espacios residenciales, corporativos y puntos de venta, con un solo equipo del primer trazo a la obra terminada.
 slug: estudio-de-arquitectura.html
-robots: noindex
 -->
 ''']
 
