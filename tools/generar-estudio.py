@@ -41,10 +41,17 @@ def cab(eb, titulo, texto, chips=()):
     </div>'''
 
 
-def cards(items):
+CONT = [0]
+
+
+def cards(items, numerar=False):
     o = ""
     for k, tt, d in items:
-        o += f'<div><b {a(*k)}>{k[0]}</b><h3 {a(*tt)}>{tt[0]}</h3><p {a(*d)}>{d[0]}</p></div>\n      '
+        n = ""
+        if numerar:
+            CONT[0] += 1
+            n = f'<span class="ar-n">{CONT[0]:02d}</span>'
+        o += f'<div><b {a(*k)}>{n}{k[0]}</b><h3 {a(*tt)}>{tt[0]}</h3><p {a(*d)}>{d[0]}</p></div>\n      '
     return f'<div class="fx__obras rise">\n      {o}</div>'
 
 
@@ -83,9 +90,9 @@ def faq(items):
     return f'<div class="fx__faq rise">{o}</div>'
 
 
-def seccion(id_, fondo, eb, titulo, texto, chips, items, imgs, cta):
+def seccion(id_, fondo, eb, titulo, texto, chips, items, imgs, cta, numerar=True):
     s = f'<section id="{id_}" class="pv__proy"{fondo}>\n  <div class="wrap">\n'
-    s += cab(eb, titulo, texto, chips) + "\n    " + cards(items) + "\n"
+    s += cab(eb, titulo, texto, chips) + "\n    " + cards(items, numerar) + "\n"
     if imgs:
         s += "    " + galeria(imgs) + "\n"
     if cta:
@@ -102,7 +109,7 @@ slug: estudio-de-arquitectura.html
 ''']
 
 # 1. Portada
-P.append(f'''<section class="phero">
+P.append(f'''<section class="phero" style="min-height:clamp(520px,88vh,880px)">
   <img src="assets/img/estudio/res-fachada.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eyebrow("ESTUDIO DE ARQUITECTURA", "ARCHITECTURE STUDIO")}
@@ -131,6 +138,19 @@ P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/vent
                 ("Ver productos comerciales", "See retail products")))
 P.append('  </div>\n</section>\n')
 
+
+# 2b. Franja de datos verificables (referente: ZHA)
+P.append(f'''<div class="wrap rise" style="margin-top:clamp(28px,4vw,52px)">
+  <div class="stats">
+    <div class="stat"><b>2005</b><span {a("Inicio de la experiencia", "Experience begins")}>Inicio de la experiencia</span></div>
+    <div class="stat"><b data-anios>[[ANIOS]]</b><span {a("Años de trayectoria", "Years of practice")}>Años de trayectoria</span></div>
+    <div class="stat"><b>2019</b><span {a("Operación en Estados Unidos", "Operating in the United States")}>Operación en Estados Unidos</span></div>
+    <div class="stat"><b>3</b><span {a("Tipologías: residencial, corporativo y comercial", "Typologies: residential, corporate and retail")}>Tipologías: residencial, corporativo y comercial</span></div>
+    <div class="stat"><b>1</b><span {a("Equipo responsable del trazo a la obra", "Team accountable from drawing to site")}>Equipo responsable del trazo a la obra</span></div>
+  </div>
+</div>
+''')
+
 # 3. Curaduría
 P.append(f'''<section class="on-dark empresas" id="curaduria">
   <div class="wrap">
@@ -138,6 +158,12 @@ P.append(f'''<section class="on-dark empresas" id="curaduria">
       {eyebrow("ARQUITECTURA INTEGRADA", "INTEGRATED ARCHITECTURE")}
       {h(2, "Lo que se dibuja es lo que se construye.", "What is drawn is what gets built.", "big")}
       {p("Arquitectura, estructura, taller y obra trabajan bajo un mismo techo. El equipo que traza el primer concepto es el que entrega la obra, y por eso la idea llega completa: proporción, material, luz y detalle. Con [[ANIOS]] años de trayectoria, esa continuidad es nuestra manera de hacer arquitectura.", "Architecture, structure, workshop and site work under one roof. The team that draws the first concept is the one that delivers the project, so the idea arrives whole: proportion, material, light and detail. With [[ANIOS]] years behind us, that continuity is how we practice architecture.", "lead")}
+    </div>
+    <div class="ar4 rise">
+      <div><b>01</b><h3 {a("Trazo", "Drawing")}>Trazo</h3><p {a("Concepto, planos y vistas realistas con el equipo que luego construye.", "Concept, plans and realistic views by the team that will build.")}>Concepto, planos y vistas realistas con el equipo que luego construye.</p></div>
+      <div><b>02</b><h3 {a("Taller", "Workshop")}>Taller</h3><p {a("Carpintería y fachadas fabricadas en nuestra planta con CNC, con el detalle intacto.", "Joinery and façades made in our CNC plant, with the detail intact.")}>Carpintería y fachadas fabricadas en nuestra planta con CNC, con el detalle intacto.</p></div>
+      <div><b>03</b><h3 {a("Obra", "Site")}>Obra</h3><p {a("Estructura, acabados e instalación dirigidos por una sola persona responsable.", "Structure, finishes and installation directed by one accountable person.")}>Estructura, acabados e instalación dirigidos por una sola persona responsable.</p></div>
+      <div><b>04</b><h3 {a("Entrega", "Handover")}>Entrega</h3><p {a("Revisión final, documentación y garantía por escrito.", "Final review, documentation and a written warranty.")}>Revisión final, documentación y garantía por escrito.</p></div>
     </div>
   </div>
 </section>
@@ -159,7 +185,7 @@ P.append(seccion("principios", ' style="background:var(--paper)"',
      (("PRINCIPIO 3", "PRINCIPLE 3"), ("El detalle es parte del concepto", "Detail is part of the concept"),
       ("Una junta, una luz o un encuentro de materiales deciden la calidad de un espacio. Los resolvemos desde el primer trazo.",
        "A joint, a light or a meeting of materials decides the quality of a space. We resolve them from the first line."))],
-    [], None))
+    [], None, False))
 
 # 4. Corporativo
 P.append(seccion("corporativo", "",
@@ -230,6 +256,31 @@ P.append(seccion("puntos-de-venta", "",
      ("assets/img/ventas/hogar-1.jpg", "Tienda de hogar y decoración en centro comercial")],
     ("puntos-de-venta.html", "Ver puntos de venta", "See retail projects")))
 
+
+# 7b. Obra seleccionada: ficha estandar (referentes: Studio Gang, Olson Kundig)
+def ficha(img, alt, titulo, filas):
+    f = "".join(f'<div><dt {a(*k)}>{k[0]}</dt><dd {a(*v)}>{v[0]}</dd></div>' for k, v in filas)
+    return f'<a class="ar-ficha" href="{img}" data-lb><figure><img src="{img}" alt="{escape(alt)}" loading="lazy"></figure><h3 {a(*titulo)}>{titulo[0]}</h3><dl>{f}</dl></a>'
+
+FILAS = lambda tip, mat, lin: [(("Tipología", "Typology"), tip), (("Materiales", "Materials"), mat), (("Línea", "Line"), lin)]
+P.append(f'''<section id="obra" class="pv__proy" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="rise">
+      {eyebrow("OBRA SELECCIONADA", "SELECTED WORK")}
+      {h(2, "Tres espacios, una misma manera de construir.", "Three spaces, one way of building.")}
+    </div>
+    <div class="ar-fichas rise">
+      {ficha("assets/img/estudio/res-fachada.jpg", "Casa residencial con piedra, madera y vidrio", ("Una casa que abre hacia el paisaje", "A house that opens to the landscape"),
+        FILAS(("Casa residencial", "Residential house"), ("Piedra, madera y vidrio", "Stone, wood and glass"), ("Residencial", "Residential")))}
+      {ficha("assets/img/estudio/cor-sala.jpg", "Sala de juntas con mesa blanca a la medida", ("Una sala de juntas hecha a la medida", "A made-to-measure boardroom"),
+        FILAS(("Oficina corporativa", "Corporate office"), ("Superficie sólida, madera y alfombra modular", "Solid surface, wood and modular carpet"), ("Corporativo", "Corporate")))}
+      {ficha("assets/img/ventas/fachada-local-1.jpg", "Fachada de local comercial de vidrio y acero con mural", ("Una fachada que se ve desde el pasillo", "A storefront seen from the corridor"),
+        FILAS(("Local comercial", "Retail store"), ("Vidrio, acero negro, mural y luz de marca", "Glass, black steel, mural and brand lighting"), ("Puntos de venta", "Retail")))}
+    </div>
+  </div>
+</section>
+''')
+
 # 7. Método
 P.append(f'''<section id="metodo" class="pv__proy" style="background:var(--paper)">
   <div class="wrap">
@@ -261,7 +312,7 @@ P.append(seccion("por-que", "",
      (("TRAYECTORIA", "TRACK RECORD"), ("[[ANIOS]] años de obra", "[[ANIOS]] years of projects"),
       ("Desde 2005 en Colombia, con operación en Estados Unidos desde 2019.",
        "In Colombia since 2005, with operations in the United States since 2019."))],
-    [], None))
+    [], None, False))
 
 # 9. Preguntas
 P.append(f'''<section id="preguntas" class="pv__proy" style="background:var(--paper)">

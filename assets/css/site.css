@@ -824,3 +824,23 @@ img { max-width: 100%; }
   .gal-ed>a:nth-child(1){grid-column:1/3!important;grid-row:span 2!important}
   .gal-ed--6>a:nth-child(6){grid-column:1/3!important}
 }
+
+/* Pagina Arquitectura: recorrido de 4 pasos y fichas de obra (referentes: Olson Kundig, Studio Gang, ZHA) */
+.ar4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(28px,4vw,48px);border-top:1px solid rgba(201,168,92,.55)}
+.ar4>div{padding:22px 22px 4px 0;border-right:1px solid rgba(201,168,92,.18)}
+.ar4>div:last-child{border-right:0}
+.ar4 b{display:block;font-weight:300;font-size:clamp(28px,3.4vw,44px);color:#C9A85C;letter-spacing:.04em}
+.ar4 h3{font-weight:400;letter-spacing:.2em;text-transform:uppercase;font-size:13px;margin:10px 0 6px}
+.ar4 p{font-size:14px;opacity:.82;line-height:1.55;margin:0;text-align:left}
+.ar-fichas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,34px);margin-top:8px}
+.ar-ficha{display:block;color:inherit}
+.ar-ficha figure{margin:0;overflow:hidden;aspect-ratio:4/5;background:#14213D}
+.ar-ficha img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ar-ficha:hover img{transform:scale(1.04)}
+.ar-ficha h3{font-weight:300;font-size:clamp(20px,2vw,26px);margin:18px 0 10px;line-height:1.25}
+.ar-ficha dl{margin:0;border-top:1px solid rgba(138,109,29,.45)}
+.ar-ficha dl div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid rgba(138,109,29,.18);font-size:13.5px}
+.ar-ficha dt{letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:#8A6D1D;padding-top:2px}
+.ar-ficha dd{margin:0;line-height:1.5;text-align:left}
+.ar-n{display:inline-block;margin-right:10px;color:#8A6D1D;letter-spacing:.08em}
+@media (max-width:820px){.ar4{grid-template-columns:1fr 1fr}.ar4>div{border-right:0;padding-right:12px}.ar-fichas{grid-template-columns:1fr}.ar-ficha figure{aspect-ratio:3/2}}
