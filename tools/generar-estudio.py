@@ -96,7 +96,7 @@ def seccion(id_, fondo, eb, titulo, texto, chips, items, imgs, cta):
 
 P = ['''<!--
 title: Estudio de arquitectura — Infinitum
-desc: Estudio de arquitectura con [[ANIOS]] años de trayectoria. Diseño con curaduría de espacios corporativos, residenciales y puntos de venta, con un solo responsable del concepto a la obra.
+desc: Arquitectura para vivir, trabajar y vender. Estudio con [[ANIOS]] años de trayectoria: espacios residenciales, corporativos y puntos de venta, con un solo equipo del primer trazo a la obra terminada.
 slug: estudio-de-arquitectura.html
 robots: noindex
 -->
@@ -107,8 +107,8 @@ P.append(f'''<section class="phero">
   <img src="assets/img/hero/hero-corporativo-1.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eyebrow("ESTUDIO DE ARQUITECTURA", "ARCHITECTURE STUDIO")}
-    {h(1, "Diseño con curaduría.", "Design, curated.")}
-    {p("[[ANIOS]] años diseñando y construyendo espacios corporativos, residenciales y comerciales. Un solo responsable, del concepto a la obra terminada.", "[[ANIOS]] years designing and building corporate, residential and retail spaces. One party accountable, from concept to the finished project.")}
+    {h(1, "Arquitectura para vivir, trabajar y vender.", "Architecture to live, work and sell.")}
+    {p("[[ANIOS]] años de arquitectura construida en Colombia y Estados Unidos. Un solo equipo, del primer trazo a la obra terminada.", "[[ANIOS]] years of built architecture in Colombia and the United States. One team, from the first line to the finished project.")}
   </div>
 </section>
 ''')
@@ -117,17 +117,17 @@ P.append(f'''<section class="phero">
 P.append('<section style="padding:0">\n  <div class="puertas puertas--fx">')
 P.append(puerta("estudio-de-arquitectura.html#corporativo", "assets/img/hero/hero-corporativo-2.jpg",
                 ("CORPORATIVO", "CORPORATE"),
-                ("Oficinas y sedes que hablan de la marca", "Offices and headquarters that speak for the brand"),
+                ("Arquitectura de oficinas y sedes", "Architecture for offices and headquarters"),
                 ("Espacios de trabajo diseñados para el equipo y para los clientes que los visitan, entregados llave en mano.", "Workspaces designed for the team and for the clients who visit them, delivered turnkey."),
                 ("Ver productos corporativos", "See corporate products")))
 P.append(puerta("estudio-de-arquitectura.html#residencial", "assets/img/hero/hero-residencial-1.jpg",
                 ("RESIDENCIAL", "RESIDENTIAL"),
-                ("Hogares de lujo contemporáneos", "Contemporary luxury homes"),
+                ("Arquitectura residencial contemporánea", "Contemporary residential architecture"),
                 ("Casas y apartamentos con arquitectura, interiorismo y mobiliario a la medida, desde el primer trazo.", "Houses and apartments with architecture, interior design and made-to-measure furniture, from the first line."),
                 ("Ver productos residenciales", "See residential products")))
 P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/hero/hero-comercial-1.jpg",
                 ("PUNTOS DE VENTA", "RETAIL"),
-                ("Locales que se ven y se recuerdan", "Spaces that are seen and remembered"),
+                ("Arquitectura comercial que se recuerda", "Retail architecture that is remembered"),
                 ("Tiendas, joyerías y restaurantes con fachada, exhibición y mobiliario resueltos como una sola pieza.", "Stores, jewelers and restaurants with façade, display and furniture resolved as a single piece."),
                 ("Ver productos comerciales", "See retail products")))
 P.append('  </div>\n</section>\n')
@@ -136,21 +136,39 @@ P.append('  </div>\n</section>\n')
 P.append(f'''<section class="on-dark empresas" id="curaduria">
   <div class="wrap">
     <div class="rise">
-      {eyebrow("NUESTRO NÚCLEO", "OUR CORE")}
-      {h(2, "Primero el diseño. Después, todo lo demás.", "Design first. Everything else follows.", "big")}
-      {p("La curaduría es nuestro oficio: elegimos cada proporción, cada material y cada punto de luz para que el espacio hable con una sola voz. Con [[ANIOS]] años de trayectoria, el criterio de diseño decide, y la fabricación propia y la instalación lo hacen realidad.", "Curation is our craft: we choose every proportion, every material and every point of light so the space speaks with one voice. With [[ANIOS]] years behind us, design judgment decides, and our own manufacturing and installation make it real.", "lead")}
+      {eyebrow("ARQUITECTURA INTEGRADA", "INTEGRATED ARCHITECTURE")}
+      {h(2, "Lo que se dibuja es lo que se construye.", "What is drawn is what gets built.", "big")}
+      {p("Arquitectura, estructura, taller y obra trabajan bajo un mismo techo. El equipo que traza el primer concepto es el que entrega la obra, y por eso la idea llega completa: proporción, material, luz y detalle. Con [[ANIOS]] años de trayectoria, esa continuidad es nuestra manera de hacer arquitectura.", "Architecture, structure, workshop and site work under one roof. The team that draws the first concept is the one that delivers the project, so the idea arrives whole: proportion, material, light and detail. With [[ANIOS]] years behind us, that continuity is how we practice architecture.", "lead")}
     </div>
   </div>
 </section>
 ''')
+
+
+# 3b. Principios (manifiesto)
+P.append(seccion("principios", ' style="background:var(--paper)"',
+    ("NUESTROS PRINCIPIOS", "OUR PRINCIPLES"), ("Tres ideas que guían cada proyecto.", "Three ideas that guide every project."),
+    ("La arquitectura se juzga por cómo se vive, se trabaja y se vende en ella. Estos principios orientan cada plano y cada obra.",
+     "Architecture is judged by how people live, work and sell in it. These principles guide every drawing and every site."),
+    [],
+    [(("PRINCIPIO 1", "PRINCIPLE 1"), ("La arquitectura se prueba en uso", "Architecture is tested in use"),
+      ("Un hogar, una oficina o un local se miden por el día a día de quienes los usan. Proyectamos desde esa experiencia.",
+       "A home, an office or a store is measured by the daily life of the people who use it. We design from that experience.")),
+     (("PRINCIPIO 2", "PRINCIPLE 2"), ("Lo dibujado se construye", "What is drawn gets built"),
+      ("Fabricamos la carpintería, calculamos la estructura y dirigimos la obra. Nada se pierde entre el plano y el espacio.",
+       "We make the joinery, calculate the structure and direct the site. Nothing is lost between the drawing and the space.")),
+     (("PRINCIPIO 3", "PRINCIPLE 3"), ("El detalle es parte del concepto", "Detail is part of the concept"),
+      ("Una junta, una luz o un encuentro de materiales deciden la calidad de un espacio. Los resolvemos desde el primer trazo.",
+       "A joint, a light or a meeting of materials decides the quality of a space. We resolve them from the first line."))],
+    [], None))
 
 # 4. Corporativo
 P.append(seccion("corporativo", "",
     ("CORPORATIVO", "CORPORATE"), ("Productos para empresas.", "Products for companies."),
     ("Una oficina bien diseñada ordena el trabajo y comunica quién es la empresa. Estos son los productos que vendemos todos los días, cada uno con diseño, obra y mobiliario bajo un solo responsable.",
      "A well-designed office organizes the work and communicates who the company is. These are the products we sell every day, each with design, construction and furniture under one party."),
-    [("Diseño y obra", "Design and build"), ("Mobiliario propio", "Own furniture"), ("Llave en mano", "Turnkey")],
-    [(("DISEÑO Y OBRA", "DESIGN AND BUILD"), ("Oficinas y sedes llave en mano", "Turnkey offices and headquarters"),
+    [("Arquitectura y obra", "Architecture and build"), ("Mobiliario propio", "Own furniture"), ("Llave en mano", "Turnkey")],
+    [(("ARQUITECTURA Y OBRA", "ARCHITECTURE AND BUILD"), ("Oficinas y sedes llave en mano", "Turnkey offices and headquarters"),
       ("Programa, distribución, interiorismo, obra, mobiliario e instalación para sedes nuevas, con una sola propuesta y una sola fecha de entrega.",
        "Program, layout, interior design, construction, furniture and installation for new headquarters, with one proposal and one delivery date.")),
      (("REFORMA", "RENOVATION"), ("Oficinas que siguen funcionando", "Offices that keep working"),
@@ -170,7 +188,7 @@ P.append(seccion("residencial", ' style="background:var(--paper)"',
     ("Una casa se diseña para la manera en que su familia vive. Trabajamos la arquitectura, el interior y el mobiliario como un solo proyecto, con la luz y los materiales elegidos desde el primer trazo.",
      "A home is designed for the way its family lives. We work the architecture, the interior and the furniture as a single project, with light and materials chosen from the first line."),
     [("Arquitectura", "Architecture"), ("Interiorismo", "Interior design"), ("Mobiliario a la medida", "Custom furniture")],
-    [(("CASA NUEVA", "NEW HOUSE"), ("Diseño arquitectónico y construcción", "Architectural design and construction"),
+    [(("CASA NUEVA", "NEW HOUSE"), ("Arquitectura y construcción", "Architecture and construction"),
       ("Del lote a la entrega: diseño, licencias, obra y acabados, con un solo equipo y un cronograma claro.",
        "From the plot to handover: design, permits, construction and finishes, with one team and a clear schedule.")),
      (("APARTAMENTO", "APARTMENT"), ("Remodelación e interiorismo", "Remodeling and interior design"),
@@ -225,8 +243,8 @@ P.append(f'''<section id="metodo" class="pv__proy" style="background:var(--paper
 
 # 8. Por qué Infinitum
 P.append(seccion("por-que", "",
-    ("LO QUE NOS DIFERENCIA", "WHAT SETS US APART"), ("Un estudio que también construye.", "A studio that also builds."),
-    ("Muchos estudios dibujan y entregan el plano a un tercero. Nosotros llevamos el diseño hasta la obra terminada, y por eso lo dibujado es lo que se ve.",
+    ("LO QUE NOS DIFERENCIA", "WHAT SETS US APART"), ("Un estudio de arquitectura que también construye.", "An architecture studio that also builds."),
+    ("Muchos estudios dibujan y entregan el plano a un tercero. Nosotros llevamos la arquitectura hasta la obra terminada, y por eso lo dibujado es lo que se ve.",
      "Many studios draw and hand the plans to a third party. We carry the design through to the finished project, so what is drawn is what you see."),
     [],
     [(("UN SOLO RESPONSABLE", "ONE PARTY ACCOUNTABLE"), ("Del concepto a la entrega", "From concept to handover"),
@@ -252,7 +270,7 @@ P.append(f'''<section id="preguntas" class="pv__proy" style="background:var(--pa
     </div>
     {faq([
         (("¿Cómo se define el valor de un proyecto?", "How is the value of a project defined?"),
-         ("Con la propuesta del anteproyecto usted recibe un presupuesto estimado, y con el proyecto ejecutivo un presupuesto cerrado, con cantidades, materiales y fecha de entrega.", "With the preliminary design you receive an estimated budget, and with the construction documents a closed budget, with quantities, materials and a delivery date.")),
+         ("Con la propuesta de anteproyecto usted recibe un presupuesto estimado, y con el proyecto ejecutivo un presupuesto cerrado, con cantidades, materiales y fecha de entrega.", "With the preliminary design you receive an estimated budget, and with the construction documents a closed budget, with quantities, materials and a delivery date.")),
         (("¿Pueden diseñar y también construir?", "Can you design and also build?"),
          ("Sí. Es lo que nos distingue: diseñamos, fabricamos la carpintería, abastecemos e instalamos, con un solo responsable.", "Yes. It is what sets us apart: we design, make the joinery, source and install, with one party accountable.")),
         (("¿Trabajan solo en Medellín?", "Do you only work in Medellín?"),
