@@ -798,3 +798,5 @@ img { max-width: 100%; }
 .hero__eyebrow { max-width: min(92vw, 820px); }
 .hero__lead { max-width: min(680px, 88vw); }
 .hero__word { overflow: visible; }
+
+.fx__rej--ancha a { aspect-ratio: 16 / 9; }
