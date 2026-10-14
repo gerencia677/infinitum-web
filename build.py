@@ -112,6 +112,7 @@ def main():
         html = base
         html = html.replace("{{TITLE}}", datos.get("title", "Infinitum"))
         html = html.replace("{{DESC}}", datos.get("desc", ""))
+        html = html.replace("{{ROBOTS}}", '<meta name="robots" content="noindex, nofollow">' if datos.get("robots") else "")
         html = html.replace("{{SLUG}}", datos.get("slug", pag.name))
         html = html.replace("{{HDR_MOD}}", datos.get("hdr", ""))
         html = html.replace("{{CONTENT}}", cuerpo)
