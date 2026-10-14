@@ -104,7 +104,7 @@ robots: noindex
 
 # 1. Portada
 P.append(f'''<section class="phero">
-  <img src="assets/img/hero/hero-corporativo-1.jpg" alt="" aria-hidden="true">
+  <img src="assets/img/estudio/res-fachada.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eyebrow("ESTUDIO DE ARQUITECTURA", "ARCHITECTURE STUDIO")}
     {h(1, "Arquitectura para vivir, trabajar y vender.", "Architecture to live, work and sell.")}
@@ -115,17 +115,17 @@ P.append(f'''<section class="phero">
 
 # 2. Tres puertas
 P.append('<section style="padding:0">\n  <div class="puertas puertas--fx">')
-P.append(puerta("estudio-de-arquitectura.html#corporativo", "assets/img/hero/hero-corporativo-2.jpg",
+P.append(puerta("estudio-de-arquitectura.html#corporativo", "assets/img/estudio/cor-pasillo.jpg",
                 ("CORPORATIVO", "CORPORATE"),
                 ("Arquitectura de oficinas y sedes", "Architecture for offices and headquarters"),
                 ("Espacios de trabajo diseñados para el equipo y para los clientes que los visitan, entregados llave en mano.", "Workspaces designed for the team and for the clients who visit them, delivered turnkey."),
                 ("Ver productos corporativos", "See corporate products")))
-P.append(puerta("estudio-de-arquitectura.html#residencial", "assets/img/hero/hero-residencial-1.jpg",
+P.append(puerta("estudio-de-arquitectura.html#residencial", "assets/img/estudio/res-sala.jpg",
                 ("RESIDENCIAL", "RESIDENTIAL"),
                 ("Arquitectura residencial contemporánea", "Contemporary residential architecture"),
                 ("Casas y apartamentos con arquitectura, interiorismo y mobiliario a la medida, desde el primer trazo.", "Houses and apartments with architecture, interior design and made-to-measure furniture, from the first line."),
                 ("Ver productos residenciales", "See residential products")))
-P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/hero/hero-comercial-1.jpg",
+P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/ventas/fachada-local-1.jpg",
                 ("PUNTOS DE VENTA", "RETAIL"),
                 ("Arquitectura comercial que se recuerda", "Retail architecture that is remembered"),
                 ("Tiendas, joyerías y restaurantes con fachada, exhibición y mobiliario resueltos como una sola pieza.", "Stores, jewelers and restaurants with façade, display and furniture resolved as a single piece."),
@@ -180,7 +180,10 @@ P.append(seccion("corporativo", "",
      (("MOBILIARIO", "FURNITURE"), ("Puestos de trabajo y almacenamiento a la medida", "Workstations and made-to-measure storage"),
       ("Mobiliario fabricado en nuestra planta o abastecido internacionalmente, con ficha técnica y garantía.",
        "Furniture made in our plant or sourced internationally, with spec sheet and warranty."))],
-    [], ("contacto.html", "Hablar de mi oficina", "Talk about my office")))
+    [("assets/img/estudio/cor-pasillo.jpg", "Pasillo de oficina con vidrio, madera y muro verde"),
+     ("assets/img/estudio/cor-sala.jpg", "Sala de juntas con mesa blanca a la medida"),
+     ("assets/img/estudio/cor-mesa.jpg", "Mesa de reuniones y carpintería en madera")],
+    ("contacto.html", "Hablar de mi oficina", "Talk about my office")))
 
 # 5. Residencial
 P.append(seccion("residencial", ' style="background:var(--paper)"',
@@ -200,9 +203,9 @@ P.append(seccion("residencial", ' style="background:var(--paper)"',
      (("MOBILIARIO", "FURNITURE"), ("Cocinas, clósets y piezas a la medida", "Kitchens, closets and made-to-measure pieces"),
       ("Carpintería fabricada en nuestra planta, con medidas exactas y acabados a elegir.",
        "Joinery made in our plant, with exact measurements and finishes of your choice."))],
-    [("assets/img/fachadas/obra-1.jpg", "Casa residencial con fachada diseñada por Infinitum"),
-     ("assets/img/fachadas/obra-3.jpg", "Casa residencial, detalle de fachada"),
-     ("assets/img/fachadas/obra-5.jpg", "Casa residencial, vista exterior")],
+    [("assets/img/estudio/res-fachada.jpg", "Fachada de casa residencial con piedra, madera y vidrio"),
+     ("assets/img/estudio/res-sala.jpg", "Sala de doble altura con vista a la montaña"),
+     ("assets/img/estudio/res-cocina.jpg", "Cocina y comedor con isla en piedra y madera"),],
     ("fachadas.html#residencial", "Ver fachadas residenciales", "See residential façades")))
 
 # 6. Puntos de venta
