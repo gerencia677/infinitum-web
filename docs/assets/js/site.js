@@ -74,13 +74,16 @@
       Array.prototype.forEach.call(dots, function (d, k) { d.classList.toggle('on', k === i); });
       if (word) {
         var label = slides[i].getAttribute('data-label') || '';
-        if (word.textContent.trim() === label) { return; }   // ya dice eso, no parpadea
+        if ((word.getAttribute('data-es') || word.textContent.trim()) === label) { return; }   // ya dice eso, no parpadea (se compara con la palabra en español, que es la clave, y no con lo que se ve)
         var lema = hero.querySelector('.hero__eyebrow'), bajada = hero.querySelector('.hero__lead'), boton = document.getElementById('hero-boton');
         var datos = hero.querySelector('.hero__lineas [data-linea="' + label + '"]');
         var lang = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
         [word, lema, bajada, boton].forEach(function (e) { if (e) { e.style.opacity = '0'; } });
         setTimeout(function () {
-          word.textContent = label;
+          /* 15-oct-2026: la palabra grande se quedaba en español con la página en inglés («Arquitectura comercial» sobre un texto en inglés) */
+          var palabraEs = (datos && datos.getAttribute('data-word-es')) || label, palabraEn = (datos && datos.getAttribute('data-word-en')) || label;
+          word.setAttribute('data-es', palabraEs); word.setAttribute('data-en', palabraEn);
+          word.textContent = lang === 'en' ? palabraEn : palabraEs;
           if (datos && lema) {
             lema.setAttribute('data-es', datos.getAttribute('data-lema-es')); lema.setAttribute('data-en', datos.getAttribute('data-lema-en'));
             lema.textContent = datos.getAttribute('data-lema-' + lang);

@@ -1,5 +1,6 @@
 <!--
 title: Verona Stone — Infinitum
+title_en: Verona Stone — Infinitum
 desc: Piedra sinterizada y porcelanato importados, con existencias y precio por metro cuadrado. Marca aliada de Infinitum.
 slug: verona-stone.html
 -->
@@ -72,7 +73,9 @@ slug: verona-stone.html
     });
   }
   function falla() {
-    grid.innerHTML = '<p class="vs-estado">En este momento no podemos mostrar el catálogo. Escríbanos por WhatsApp y le enviamos las láminas disponibles con su precio.</p>';
+    grid.innerHTML = document.documentElement.getAttribute('lang') === 'en'
+      ? '<p class="vs-estado">We cannot show the catalog right now. Write to us on WhatsApp and we will send you the available slabs with their price.</p>'
+      : '<p class="vs-estado">En este momento no podemos mostrar el catálogo. Escríbanos por WhatsApp y le enviamos las láminas disponibles con su precio.</p>';
   }
   // El catálogo se vuelve a pedir solo: cada 45 segundos mientras la pestaña se ve, y apenas la persona vuelve a ella.
   // Así, lo que se cambie en Atrio (precios, láminas, existencias) llega a una página que alguien dejó abierta, sin recargar.

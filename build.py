@@ -111,6 +111,7 @@ def main():
 
         html = base
         html = html.replace("{{TITLE}}", datos.get("title", "Infinitum"))
+        html = html.replace("{{TITLE_EN}}", datos.get("title_en", datos.get("title", "Infinitum")))   # la pestaña del navegador también cambia con el idioma (15-oct-2026)
         html = html.replace("{{DESC}}", datos.get("desc", ""))
         html = html.replace("{{ROBOTS}}", '<meta name="robots" content="noindex, nofollow">' if datos.get("robots") else "")
         html = html.replace("{{SLUG}}", datos.get("slug", pag.name))
