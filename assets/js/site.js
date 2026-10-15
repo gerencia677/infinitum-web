@@ -182,17 +182,22 @@
 
   /* ---------- 6. Espanol / Ingles ---------- */
 
-  var LANG_KEY = 'infinitum-lang';
+  /* El sitio abre SIEMPRE en español. Solo se recuerda el ingles si la persona lo escogio con el boton,
+     y la eleccion vence a los 30 dias. (Antes se guardaba cualquier idioma aplicado, incluso el de ?lang=,
+     y un solo toque en English dejaba el sitio en ingles para siempre en ese navegador.) */
+  var LANG_KEY = 'infinitum-lang-v2';
 
   function readLang() {
+    var q = (location.search.match(/[?&]lang=(es|en)\b/) || [])[1];
+    if (q) { return q; }
     try {
-      var q = (location.search.match(/[?&]lang=(es|en)\b/) || [])[1];
-      if (q) { localStorage.setItem(LANG_KEY, q); return q; }
-    } catch (err) { /* sin almacenamiento, se sigue */ }
-    try { return localStorage.getItem(LANG_KEY) || 'es'; } catch (err) { return 'es'; }
+      var o = JSON.parse(localStorage.getItem(LANG_KEY) || 'null');
+      if (o && (o.v === 'en' || o.v === 'es') && (Date.now() - o.t) < 30 * 86400000) { return o.v; }
+    } catch (err) { /* sin almacenamiento, se abre en español */ }
+    return 'es';
   }
   function saveLang(v) {
-    try { localStorage.setItem(LANG_KEY, v); } catch (err) { /* modo privado, se ignora */ }
+    try { localStorage.setItem(LANG_KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (err) { /* modo privado, se ignora */ }
   }
 
   /* Anos cumplidos: Infinitum nacio el 5 de abril de 2005. El numero cambia cada 5 de abril, en hora de Colombia. */
@@ -223,11 +228,10 @@
     Array.prototype.forEach.call(document.querySelectorAll('.lang button'), function (b) {
       b.classList.toggle('on', b.getAttribute('data-lang') === lang);
     });
-    saveLang(lang);
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.lang button'), function (b) {
-    b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
+    b.addEventListener('click', function () { var l = b.getAttribute('data-lang'); applyLang(l); saveLang(l); });
   });
 
   applyLang(readLang());
