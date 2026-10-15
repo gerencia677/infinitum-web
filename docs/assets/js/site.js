@@ -182,10 +182,20 @@
 
   /* ---------- 6. Espanol / Ingles ---------- */
 
-  /* El sitio abre SIEMPRE en español. Solo se recuerda el ingles si la persona lo escogio con el boton,
-     y la eleccion vence a los 30 dias. (Antes se guardaba cualquier idioma aplicado, incluso el de ?lang=,
-     y un solo toque en English dejaba el sitio en ingles para siempre en ese navegador.) */
+  /* Idioma por lugar (orden del 15-oct-2026): en Latinoamérica y España el sitio abre en español; en Estados Unidos,
+     Canadá y el resto del mundo abre en inglés. La zona horaria del aparato dice dónde está la persona, sin pedir
+     ubicación ni llamar a terceros. Si la persona toca el botón de idioma, su elección manda por 30 días.
+     Los buscadores y las vistas previas siempre ven español. */
   var LANG_KEY = 'infinitum-lang-v2';
+  var ZONAS_NORTE = /^(America\/(New_York|Detroit|Chicago|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Nome|Yakutat|Metlakatla|Adak|Menominee|Indiana\/.*|Kentucky\/.*|North_Dakota\/.*|Toronto|Montreal|Nipigon|Thunder_Bay|Vancouver|Edmonton|Winnipeg|Regina|Halifax|St_Johns|Moncton|Glace_Bay|Goose_Bay|Iqaluit|Whitehorse|Yellowknife|Dawson.*|Fort_Nelson|Creston|Swift_Current|Rainy_River|Resolute|Rankin_Inlet|Cambridge_Bay|Inuvik|Pangnirtung|Atikokan|Blanc-Sablon)|US\/.*|Canada\/.*|Pacific\/Honolulu)$/;
+  function idiomaPorZona(tz) {
+    tz = tz || '';
+    if (ZONAS_NORTE.test(tz)) { return 'en'; }
+    if (/^America\//.test(tz) || /^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta)$/.test(tz)) { return 'es'; }
+    return tz ? 'en' : 'es';
+  }
+  window.__idiomaPorZona = idiomaPorZona;
+  function esBuscador() { return /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|lighthouse/i.test(navigator.userAgent || ''); }
 
   function readLang() {
     var q = (location.search.match(/[?&]lang=(es|en)\b/) || [])[1];
@@ -193,8 +203,9 @@
     try {
       var o = JSON.parse(localStorage.getItem(LANG_KEY) || 'null');
       if (o && (o.v === 'en' || o.v === 'es') && (Date.now() - o.t) < 30 * 86400000) { return o.v; }
-    } catch (err) { /* sin almacenamiento, se abre en español */ }
-    return 'es';
+    } catch (err) { /* sin almacenamiento, se decide por lugar */ }
+    if (esBuscador()) { return 'es'; }
+    try { return idiomaPorZona(Intl.DateTimeFormat().resolvedOptions().timeZone); } catch (err) { return 'es'; }
   }
   function saveLang(v) {
     try { localStorage.setItem(LANG_KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (err) { /* modo privado, se ignora */ }
