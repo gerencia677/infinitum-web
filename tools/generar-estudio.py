@@ -208,7 +208,7 @@ P.append(seccion("corporativo", "",
     [("assets/img/estudio/cor-pasillo.jpg", "Pasillo de oficina con vidrio, madera y muro verde"),
      ("assets/img/estudio/cor-sala.jpg", "Sala de juntas con mesa blanca a la medida"),
      ("assets/img/estudio/cor-mesa.jpg", "Mesa de reuniones y carpintería en madera")],
-    ("contacto.html", "Hablar de mi oficina", "Talk about my office")))
+    ("arquitectura-corporativa.html", "Ver la galería corporativa", "See the corporate gallery")))
 
 # 5. Residencial
 P.append(seccion("residencial", ' style="background:var(--paper)"',
@@ -231,7 +231,7 @@ P.append(seccion("residencial", ' style="background:var(--paper)"',
     [("assets/img/estudio/res-fachada.jpg", "Fachada de casa residencial con piedra, madera y vidrio"),
      ("assets/img/estudio/res-sala.jpg", "Sala de doble altura con vista a la montaña"),
      ("assets/img/estudio/res-cocina.jpg", "Cocina y comedor con isla en piedra y madera"),],
-    ("fachadas.html#residencial", "Ver fachadas residenciales", "See residential façades")))
+    ("arquitectura-residencial.html", "Ver la galería residencial", "See the residential gallery")))
 
 # 6. Puntos de venta
 P.append(seccion("puntos-de-venta", "",
