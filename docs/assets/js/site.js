@@ -182,17 +182,16 @@
 
   /* ---------- 6. Espanol / Ingles ---------- */
 
-  /* Idioma por lugar (orden del 15-oct-2026): en Latinoamérica y España el sitio abre en español; en Estados Unidos,
-     Canadá y el resto del mundo abre en inglés. La zona horaria del aparato dice dónde está la persona, sin pedir
+  /* Idioma por lugar (orden del 15-oct-2026): en los países de habla hispana el sitio abre en español; en Estados
+     Unidos, Brasil, Canadá y el resto del mundo abre en inglés, el idioma más universal. La zona horaria del aparato dice dónde está la persona, sin pedir
      ubicación ni llamar a terceros. Si la persona toca el botón de idioma, su elección manda por 30 días.
      Los buscadores y las vistas previas siempre ven español. */
   var LANG_KEY = 'infinitum-lang-v2';
-  var ZONAS_NORTE = /^(America\/(New_York|Detroit|Chicago|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Nome|Yakutat|Metlakatla|Adak|Menominee|Indiana\/.*|Kentucky\/.*|North_Dakota\/.*|Toronto|Montreal|Nipigon|Thunder_Bay|Vancouver|Edmonton|Winnipeg|Regina|Halifax|St_Johns|Moncton|Glace_Bay|Goose_Bay|Iqaluit|Whitehorse|Yellowknife|Dawson.*|Fort_Nelson|Creston|Swift_Current|Rainy_River|Resolute|Rankin_Inlet|Cambridge_Bay|Inuvik|Pangnirtung|Atikokan|Blanc-Sablon)|US\/.*|Canada\/.*|Pacific\/Honolulu)$/;
+  /* Español solo donde se habla español. Todo lo demás (Estados Unidos, Canadá, Brasil, Europa, Asia...) abre en inglés. */
+  var ZONAS_ES = /^(America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Hermosillo|Tijuana|Bahia_Banderas|Guatemala|El_Salvador|Tegucigalpa|Managua|Costa_Rica|Panama|Havana|Santo_Domingo|Puerto_Rico|Bogota|Caracas|Guayaquil|Lima|La_Paz|Santiago|Punta_Arenas|Montevideo|Asuncion|Argentina\/.*|Buenos_Aires|Cordoba|Mendoza|Catamarca|Jujuy)|Pacific\/(Easter|Galapagos)|Atlantic\/Canary|Europe\/Madrid|Africa\/Ceuta)$/;
   function idiomaPorZona(tz) {
-    tz = tz || '';
-    if (ZONAS_NORTE.test(tz)) { return 'en'; }
-    if (/^America\//.test(tz) || /^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta)$/.test(tz)) { return 'es'; }
-    return tz ? 'en' : 'es';
+    if (!tz) { return 'es'; }
+    return ZONAS_ES.test(tz) ? 'es' : 'en';
   }
   window.__idiomaPorZona = idiomaPorZona;
   function esBuscador() { return /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|preview|lighthouse/i.test(navigator.userAgent || ''); }
