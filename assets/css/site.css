@@ -149,7 +149,7 @@ section { padding: clamp(64px, 10vw, 140px) 0; }
 .menu__nav a {
   display: flex; align-items: baseline; gap: 18px;
   font-size: clamp(15px, min(2.8svh, 3.2vw), 21px); font-weight: 300; letter-spacing: 0.02em;
-  color: var(--white); padding: clamp(7px, 1.3svh, 11px) 0;
+  color: var(--white); padding: clamp(5px, 0.95svh, 9px) 0;
   border-bottom: 1px solid var(--line-light);
   transition: color 0.25s var(--ease), padding-left 0.35s var(--ease);
 }
