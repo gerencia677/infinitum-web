@@ -46,6 +46,17 @@
     if (a.getAttribute('href') === here) { a.classList.add('is-here'); }
   });
 
+  /* Submenu de Arquitectura: se despliega con la flechita y abre solo en sus paginas */
+  var grp = document.querySelector('.menu__grp');
+  var tog = grp && grp.querySelector('.menu__tog');
+  function setGrp(open) {
+    if (!grp) { return; }
+    grp.classList.toggle('open', open);
+    if (tog) { tog.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  }
+  if (tog) { tog.addEventListener('click', function () { setGrp(!grp.classList.contains('open')); }); }
+  if (grp && ['estudio-de-arquitectura.html', 'arquitectura-corporativa.html', 'arquitectura-residencial.html', 'puntos-de-venta.html'].indexOf(here) !== -1) { setGrp(true); }
+
   /* ---------- 3. Carrusel del heroe ---------- */
 
   var hero = document.querySelector('.hero');
