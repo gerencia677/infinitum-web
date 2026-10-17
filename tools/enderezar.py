@@ -73,3 +73,62 @@ if __name__ == "__main__":
     im = Image.open(sys.argv[1]); a, c = angulo(im)
     print(f"angulo {a:+.2f} confianza {c:.2f}")
     if len(sys.argv) > 2: enderezar(im, a).save(sys.argv[2], quality=90)
+
+
+# ---------- Correccion de perspectiva vertical (verticales que convergen) ----------
+
+def _bordes(im, lado=480, rango=14.0):
+    g = ImageOps.exif_transpose(im).convert("L")
+    g.thumbnail((lado, lado), Image.LANCZOS)
+    g = g.filter(ImageFilter.GaussianBlur(1.0))
+    W, H = g.size
+    gx = list(g.filter(KX).getdata()); gy = list(g.filter(KY).getdata())
+    pts = []
+    for idx, (a, b) in enumerate(zip(gx, gy)):
+        dx = a - 128; dy = b - 128
+        m = math.hypot(dx, dy)
+        if m < 60: continue
+        d = (math.degrees(math.atan2(dy, dx)) + 90) % 180 - 90
+        if abs(d) <= rango + 8:
+            pts.append(((idx % W - W / 2) / (W / 2), d, m))
+    return pts, W, H
+
+
+def estimar(im):
+    """Devuelve (a, b, confianza): el angulo de los bordes verticales es d(u) = a + b*u, con u en [-1, 1]
+    de izquierda a derecha. a es la inclinacion (roll) y b cuanto convergen (keystone)."""
+    pts, W, H = _bordes(im)
+    if len(pts) < 300: return 0.0, 0.0, 0.0
+    best = None; sc_all = []
+    for bi in range(-16, 17):
+        b = bi * 0.5
+        hist = {}
+        for u, d, m in pts:
+            r = d - b * u
+            k = round(r * 2)               # cajas de 0,5 grados
+            hist[k] = hist.get(k, 0) + m
+        sc = sum(v * v for v in hist.values()); sc_all.append(sc)
+        if best is None or sc > best[0]:
+            kmax = max(hist, key=hist.get); best = (sc, b, kmax / 2)
+    conf = best[0] / (sum(sc_all) / len(sc_all))
+    return best[2], best[1], conf
+
+
+def corregir(im, a, b):
+    """Gira -a (roll) y deshace la convergencia b (keystone) con una transformacion de perspectiva; recorta bordes vacios."""
+    im = ImageOps.exif_transpose(im).convert("RGB")
+    if abs(a) > 0.01: im = im.rotate(a, resample=Image.BICUBIC)
+    W, H = im.size
+    if abs(b) > 0.05:
+        h = -math.tan(math.radians(b)) * 2 / W        # fuerza de la correccion
+        cx, cy = W / 2, H / 2
+        den = 1 - h * cy
+        co = (1 / den, cx * h / den, -cx * h * cy / den, 0, (1 + cy * h) / den, -cy * cy * h / den, 0, h / den)
+        im = im.transform((W, H), Image.PERSPECTIVE, co, Image.BICUBIC)
+    # recorte conservador de bordes vacios
+    t = math.radians(abs(a)); k = 1 / (math.cos(t) + math.sin(t) * max(W / H, H / W))
+    m = abs(b) / 40.0 * 0.5
+    k *= (1 - min(0.18, m))
+    nw, nh = W * k, H * k
+    x0, y0 = (W - nw) / 2, (H - nh) / 2
+    return im.crop((round(x0), round(y0), round(x0 + nw), round(y0 + nh)))
