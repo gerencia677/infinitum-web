@@ -61,13 +61,13 @@ parts.append(f'''<section id="escalas" class="pv__proy">
     <div class="rise">
       {eb("UNA SOLA MANERA DE PENSAR", "ONE WAY OF THINKING")}
       {h(2, "Cuatro escalas, el mismo criterio.", "Four scales, the same judgment.")}
-      {p("La arquitectura no cambia de calidad cuando cambia de tamaño. Lo que se aprende en el detalle de una puerta sirve para el edificio, y lo que se piensa para un edificio cuida el detalle de una puerta.", "Architecture does not change in quality when it changes in size. What is learned in the detail of a door serves the building, and what is thought for a building takes care of the detail of a door.")}
+      {p("La arquitectura mantiene su calidad cuando cambia de tamaño. Lo que se aprende en el detalle de una puerta sirve para el edificio, y lo que se piensa para un edificio cuida el detalle de una puerta.", "Architecture keeps its quality when it changes in size. What is learned in the detail of a door serves the building, and what is thought for a building takes care of the detail of a door.")}
     </div>
     <div class="esc rise">
 {filas}    </div>
     <div class="esc__cierre rise">
       {h(3, "Y cuando su idea crece, el equipo crece con ella.", "And when your idea grows, the team grows with it.")}
-      {p("No ponemos el techo. Lo ponemos entre los dos, desde la primera conversación.", "We do not set the ceiling. We set it together, from the first conversation.")}
+      {p("El techo lo ponemos entre los dos, desde la primera conversación.", "We set the ceiling together, from the first conversation.")}
     </div>
   </div>
 </section>
