@@ -40,7 +40,7 @@ robots: noindex
 ''']
 
 parts.append(f'''<section class="phero" style="min-height:clamp(520px,86vh,860px)">
-  <img src="assets/img/paseo-junin/hero-paseo-junin.jpg" alt="" aria-hidden="true">
+  <img src="assets/img/paseo-junin/hero-paseo-junin-v2.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eb("ARQUITECTURA · ALCANCE", "ARCHITECTURE · SCOPE")}
     {h(1, "El alcance lo define su proyecto.", "Your project defines the scope.")}
