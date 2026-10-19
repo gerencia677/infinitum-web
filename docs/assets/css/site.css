@@ -883,3 +883,7 @@ img { max-width: 100%; }
 .ar-ficha-d dt{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#C9A85C;margin-bottom:6px}
 .ar-ficha-d dd{margin:0;line-height:1.45}
 @media (max-width:820px){.ar-ficha-d{grid-template-columns:1fr 1fr}.ar-ficha-d>div{border-right:0}}
+
+.ar-ficha-d--claro{border-top-color:rgba(138,109,29,.45)}
+.ar-ficha-d--claro>div{border-right-color:rgba(138,109,29,.2)}
+.ar-ficha-d--claro dt{color:#8A6D1D}

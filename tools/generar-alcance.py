@@ -40,7 +40,7 @@ robots: noindex
 ''']
 
 parts.append(f'''<section class="phero" style="min-height:clamp(520px,86vh,860px)">
-  <img src="assets/img/paseo-junin/render-2.jpg" alt="" aria-hidden="true">
+  <img src="assets/img/paseo-junin/hero-paseo-junin.jpg" alt="" aria-hidden="true">
   <div class="phero__in">
     {eb("ARQUITECTURA · ALCANCE", "ARCHITECTURE · SCOPE")}
     {h(1, "El alcance lo define su proyecto.", "Your project defines the scope.")}
@@ -78,18 +78,19 @@ parts.append(f'''<section id="paseo-junin" class="on-dark empresas">
     <div class="rise">
       {eb("PROYECTO DESTACADO · COMERCIO", "FEATURED PROJECT · RETAIL")}
       {h(2, "Paseo Junín", "Paseo Junín", "big")}
-      {p("Un paseo comercial en El Santuario, Antioquia: una cubierta continua en madera, columnas vestidas de verde y una plaza escalonada que invita a entrar. Pensado para que el comercio y el paisaje se encuentren.", "A shopping promenade in El Santuario, Antioquia: a continuous timber canopy, green-wrapped columns and a stepped plaza that invites you in. Thought so that retail and landscape meet.", "lead")}
+      {p("Un paseo comercial en El Santuario, Antioquia, diseñado y construido por Infinitum: volumetría oscura con rotulación luminosa, muros de ladrillo, arcos con jardineras y cielos de madera. Un lugar que se reconoce desde la calle.", "A shopping promenade in El Santuario, Antioquia, designed and built by Infinitum: a dark volume with luminous signage, brick walls, arches with planters and timber ceilings. A place recognized from the street.", "lead")}
     </div>
     <div class="gal-ed gal-ed--3 rise">
-      <a href="assets/img/paseo-junin/render-1.jpg" data-lb><img src="assets/img/paseo-junin/render-1.jpg" alt="Render del paseo comercial Paseo Junín, vista de esquina con cubierta en madera y vegetación" loading="lazy"></a>
-      <a href="assets/img/paseo-junin/render-3.jpg" data-lb><img src="assets/img/paseo-junin/render-3.jpg" alt="Render del paseo comercial Paseo Junín, fachada continua y plaza escalonada" loading="lazy"></a>
-      <a href="assets/img/paseo-junin/render-4.jpg" data-lb><img src="assets/img/paseo-junin/render-4.jpg" alt="Render del paseo comercial Paseo Junín, columnas vestidas de verde" loading="lazy"></a>
+      <a href="assets/img/paseo-junin/pj-01.jpg" data-lb><img src="assets/img/paseo-junin/pj-01.jpg" alt="Paseo Junín, vista de esquina con rotulación luminosa" loading="lazy"></a>
+      <a href="assets/img/paseo-junin/pj-05.jpg" data-lb><img src="assets/img/paseo-junin/pj-05.jpg" alt="Paseo Junín, arcos de ladrillo con jardineras iluminadas" loading="lazy"></a>
+      <a href="assets/img/paseo-junin/pj-06.jpg" data-lb><img src="assets/img/paseo-junin/pj-06.jpg" alt="Paseo Junín, pabellón de ladrillo y arcos de noche" loading="lazy"></a>
     </div>
+    <p class="rise" style="margin:26px 0 0"><a class="pill pill--gold" href="paseo-junin.html" {a("Ver el proyecto completo", "See the full project")}>Ver el proyecto completo</a></p>
     <dl class="ar-ficha-d rise">
       <div><dt {a("Tipología", "Typology")}>Tipología</dt><dd {a("Paseo comercial", "Shopping promenade")}>Paseo comercial</dd></div>
       <div><dt {a("Lugar", "Place")}>Lugar</dt><dd>El Santuario, Antioquia</dd></div>
-      <div><dt {a("Alcance", "Scope")}>Alcance</dt><dd {a("Arquitectura y desarrollo del proyecto", "Architecture and project development")}>Arquitectura y desarrollo del proyecto</dd></div>
-      <div><dt {a("Imágenes", "Images")}>Imágenes</dt><dd {a("Renders del proyecto", "Project renders")}>Renders del proyecto</dd></div>
+      <div><dt {a("Alcance", "Scope")}>Alcance</dt><dd {a("Arquitectura y ejecución de obra", "Architecture and construction")}>Arquitectura y ejecución de obra</dd></div>
+      <div><dt {a("Imágenes", "Images")}>Imágenes</dt><dd {a("Registro fotográfico de obra", "Site photography")}>Registro fotográfico de obra</dd></div>
     </dl>
   </div>
 </section>

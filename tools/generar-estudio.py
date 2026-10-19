@@ -131,7 +131,7 @@ P.append(puerta("estudio-de-arquitectura.html#residencial", "assets/img/estudio/
                 ("Arquitectura residencial contemporánea", "Contemporary residential architecture"),
                 ("Casas y apartamentos con arquitectura, interiorismo y mobiliario a la medida, desde el primer trazo.", "Houses and apartments with architecture, interior design and made-to-measure furniture, from the first line."),
                 ("Ver productos residenciales", "See residential products")))
-P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/ventas/fachada-local-1.jpg",
+P.append(puerta("estudio-de-arquitectura.html#puntos-de-venta", "assets/img/paseo-junin/pj-01.jpg",
                 ("PUNTOS DE VENTA", "RETAIL"),
                 ("Arquitectura comercial que se recuerda", "Retail architecture that is remembered"),
                 ("Tiendas, joyerías y restaurantes con fachada, exhibición y mobiliario resueltos como una sola pieza.", "Stores, jewelers and restaurants with façade, display and furniture resolved as a single piece."),
@@ -251,10 +251,10 @@ P.append(seccion("puntos-de-venta", "",
      (("FACHADA DEL LOCAL", "STOREFRONT"), ("La fachada vende antes de que el cliente entre", "The storefront sells before the customer walks in"),
       ("Vidrio, acero, mural y luz de marca, con la estructura calculada desde el primer plano.",
        "Glass, steel, mural and brand lighting, with the structure calculated from the first drawing."))],
-    [("assets/img/ventas/fachada-local-1.jpg", "Fachada de un local de calzado con vidrio, acero y mural gráfico"),
-     ("assets/img/ventas/fachada-local-2.jpg", "Fachada de esquina de un local comercial"),
-     ("assets/img/ventas/hogar-1.jpg", "Tienda de hogar y decoración en centro comercial")],
-    ("puntos-de-venta.html", "Ver puntos de venta", "See retail projects")))
+    [("assets/img/paseo-junin/pj-01.jpg", "Paseo Junín, paseo comercial en El Santuario, Antioquia"),
+     ("assets/img/paseo-junin/pj-05.jpg", "Arcos de ladrillo con jardineras iluminadas en Paseo Junín"),
+     ("assets/img/ventas/fachada-local-1.jpg", "Fachada de un local de calzado con vidrio, acero y mural gráfico")],
+    ("paseo-junin.html", "Ver Paseo Junín", "See Paseo Junín")))
 
 
 # 7b. Obra seleccionada: ficha estandar (referentes: Studio Gang, Olson Kundig)
@@ -274,8 +274,8 @@ P.append(f'''<section id="obra" class="pv__proy" style="background:var(--paper)"
         FILAS(("Casa residencial", "Residential house"), ("Piedra, madera y vidrio", "Stone, wood and glass"), ("Residencial", "Residential")))}
       {ficha("assets/img/estudio/cor-sala.jpg", "Sala de juntas con mesa blanca a la medida", ("Una sala donde las decisiones se toman con claridad", "A room where decisions are made with clarity"),
         FILAS(("Oficina corporativa", "Corporate office"), ("Superficie sólida, madera y alfombra modular", "Solid surface, wood and modular carpet"), ("Corporativo", "Corporate")))}
-      {ficha("assets/img/ventas/fachada-local-1.jpg", "Fachada de local comercial de vidrio y acero con mural", ("Una vitrina que se ve desde lejos", "A storefront seen from afar"),
-        FILAS(("Local comercial", "Retail store"), ("Vidrio, acero negro, mural y luz de marca", "Glass, black steel, mural and brand lighting"), ("Puntos de venta", "Retail")))}
+      {ficha("assets/img/paseo-junin/pj-01.jpg", "Paseo Junín, paseo comercial con rotulación luminosa", ("Un paseo comercial que se reconoce desde la calle", "A shopping promenade recognized from the street"),
+        FILAS(("Paseo comercial", "Shopping promenade"), ("Ladrillo, aluminio compuesto, madera, vidrio y luz", "Brick, aluminum composite, timber, glass and light"), ("Puntos de venta", "Retail")))}
       {ficha("assets/img/estudio/res-pasillo.jpg", "Pasillo de casa con cielo de madera y muro de piedra", ("Un recorrido de madera y luz que invita a entrar", "A path of wood and light that invites you in"),
         FILAS(("Casa residencial", "Residential house"), ("Madera, piedra y vidrio a piso", "Wood, stone and floor-to-ceiling glass"), ("Residencial", "Residential")))}
       {ficha("assets/img/estudio/cor-pasillo.jpg", "Pasillo de oficina con vidrio, madera y muro verde", ("Una oficina con luz, madera y verde", "An office with light, wood and greenery"),
