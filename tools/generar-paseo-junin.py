@@ -18,8 +18,13 @@ def eb(es, en): return f'<p class="eyebrow" {a(es, en)}>{es}</p>'
 
 
 fotos = sorted(glob.glob(str(RAIZ / "assets/img/paseo-junin/pj-*.jpg")))
+def ruta(f):
+    b = os.path.basename(f)
+    return f"assets/img/paseo-junin2/{b}" if (RAIZ / "assets/img/paseo-junin2" / b).exists() else f"assets/img/paseo-junin/{b}"
+
+
 items = "".join(
-    f'<a href="assets/img/paseo-junin/{os.path.basename(f)}" data-lb><img src="assets/img/paseo-junin/{os.path.basename(f)}" alt="Paseo Junín, paseo comercial en El Santuario, Antioquia, foto {i}" loading="lazy"></a>'
+    f'<a href="{ruta(f)}" data-lb><img src="{ruta(f)}" alt="Paseo Junín, paseo comercial en El Santuario, Antioquia, foto {i}" loading="lazy"></a>'
     for i, f in enumerate(fotos, 1))
 
 html = f'''<!--

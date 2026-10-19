@@ -14,8 +14,12 @@ def a(es, en):
 
 def pagina(slug, pref, titulo, desc, hero, eb, h1, intro, alt, vuelta, cierre):
     fotos = sorted(glob.glob(str(RAIZ / "assets/img/galeria" / f"{pref}-*.jpg")))
+
+    def ruta(f):
+        b = os.path.basename(f)
+        return f"assets/img/galeria2/{b}" if (RAIZ / "assets/img/galeria2" / b).exists() else f"assets/img/galeria/{b}"
     items = "".join(
-        f'<a href="assets/img/galeria/{os.path.basename(f)}" data-lb><img src="assets/img/galeria/{os.path.basename(f)}" alt="{escape(alt[0])}, foto {i}" loading="lazy"></a>'
+        f'<a href="{ruta(f)}" data-lb><img src="{ruta(f)}" alt="{escape(alt[0])}, foto {i}" loading="lazy"></a>'
         for i, f in enumerate(fotos, 1))
     return f'''<!--
 title: {titulo}

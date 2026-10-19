@@ -254,7 +254,7 @@ P.append(seccion("puntos-de-venta", "",
     [("assets/img/paseo-junin/pj-01.jpg", "Paseo Junín, paseo comercial en El Santuario, Antioquia"),
      ("assets/img/paseo-junin/pj-05.jpg", "Arcos de ladrillo con jardineras iluminadas en Paseo Junín"),
      ("assets/img/ventas/fachada-local-1.jpg", "Fachada de un local de calzado con vidrio, acero y mural gráfico")],
-    ("paseo-junin.html", "Ver Paseo Junín", "See Paseo Junín")))
+    ("puntos-de-venta.html", "Ver puntos de venta", "See retail projects")))
 
 
 # 7b. Obra seleccionada: ficha estandar (referentes: Studio Gang, Olson Kundig)
