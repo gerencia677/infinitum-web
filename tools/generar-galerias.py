@@ -17,6 +17,9 @@ def pagina(slug, pref, titulo, desc, hero, eb, h1, intro, alt, vuelta, cierre):
 
     def ruta(f):
         b = os.path.basename(f)
+        b2 = b.replace(".jpg", "-b.jpg")
+        if (RAIZ / "assets/img/galeria2" / b2).exists():
+            return f"assets/img/galeria2/{b2}"
         return f"assets/img/galeria2/{b}" if (RAIZ / "assets/img/galeria2" / b).exists() else f"assets/img/galeria/{b}"
     items = "".join(
         f'<a href="{ruta(f)}" data-lb><img src="{ruta(f)}" alt="{escape(alt[0])}, foto {i}" loading="lazy"></a>'
