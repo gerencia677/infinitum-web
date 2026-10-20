@@ -20,6 +20,8 @@ def eb(es, en): return f'<p class="eyebrow" {a(es, en)}>{es}</p>'
 fotos = sorted(glob.glob(str(RAIZ / "assets/img/paseo-junin/pj-*.jpg")))
 def ruta(f):
     b = os.path.basename(f)
+    if (RAIZ / "assets/img/paseo-junin2" / b.replace(".jpg", "-b.jpg")).exists():
+        return "assets/img/paseo-junin2/" + b.replace(".jpg", "-b.jpg")
     return f"assets/img/paseo-junin2/{b}" if (RAIZ / "assets/img/paseo-junin2" / b).exists() else f"assets/img/paseo-junin/{b}"
 
 
